@@ -293,10 +293,10 @@ PatentScout Lite aims to help researchers, entrepreneurs, and innovators discove
 
 ---
 
-## Author
+## Authors
 
-**Sudharshan S**
-**Sivaganesh B**
-**Prennithe S G**
+**Sudharshan S**  
+**Sivaganesh B**  
+**Prennithe S G**  
 
 Built as an Agentic AI project focused on innovation discovery, patent intelligence, and startup opportunity generation.
