@@ -6,16 +6,13 @@ from backend.models.pydantic_models import Paper
 
 class TestResearchAgent(unittest.TestCase):
     @patch('backend.agents.research_agent.fetch_papers')
-    @patch('backend.agents.research_agent.fetch_arxiv_papers')
     @patch('backend.agents.research_agent.store_documents')
     @patch('backend.agents.research_agent.retrieve')
     @patch('backend.agents.research_agent.generate_response')
-    def test_research_agent_success(self, mock_generate, mock_retrieve, mock_store, mock_arxiv, mock_papers):
+    def test_research_agent_success(self, mock_generate, mock_retrieve, mock_store, mock_papers):
         # 1. Setup mock returns
         mock_papers.return_value = [
-            Paper(title="Mock SS Paper", abstract="An abstract about EV battery aging.", authors=["Author A"], year=2024, source="Semantic Scholar", url="http://ss/1")
-        ]
-        mock_arxiv.return_value = [
+            Paper(title="Mock SS Paper", abstract="An abstract about EV battery aging.", authors=["Author A"], year=2024, source="Semantic Scholar", url="http://ss/1"),
             Paper(title="Mock arXiv Paper", abstract="Another abstract about battery cooling.", authors=["Author B"], year=2023, source="arXiv", url="http://arxiv/1")
         ]
         
@@ -73,7 +70,6 @@ class TestResearchAgent(unittest.TestCase):
         
         # Verify that sub-functions were called
         mock_papers.assert_called_once_with("Electric Vehicles", 50)
-        mock_arxiv.assert_called_once_with("Electric Vehicles", 30)
         mock_store.assert_called_once()
         mock_retrieve.assert_called_once()
         mock_generate.assert_called_once()

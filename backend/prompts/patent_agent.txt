@@ -1,0 +1,14 @@
+You are an expert patent analyst.
+Given the following patent abstracts about {domain}, identify the top 5-7 major patent categories/clusters.
+
+Patent abstracts:
+{patents}
+
+For each category provide:
+- category: Short descriptive name (3-5 words)
+- description: One sentence explaining the patented technology area and the focus of the patents
+- saturation: Patent density/saturation level ('High', 'Medium', or 'Low')
+- major_assignees: List of top assignee names (companies or institutions) holding patents in this category
+
+Return ONLY a valid JSON array. No explanation, no markdown, no extra text.
+Format: [{"category":"...","description":"...","saturation":"...","major_assignees":["..."]}]

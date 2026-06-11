@@ -3,11 +3,12 @@ from typing import List, Optional
 from backend.models.pydantic_models import Patent
 from backend.config import settings
 
-def fetch_patents(domain: str, max_results: int = 15) -> List[Patent]:
+def fetch_patents(domain: str, max_results: Optional[int] = None, limit: Optional[int] = None) -> List[Patent]:
     """
     Fetch patents from the PatentsView API.
     If the API fails, it falls back to generating query-based mock patents to ensure stability.
     """
+    count = limit if limit is not None else (max_results if max_results is not None else 15)
     print(f"[Patent Fetcher] Querying PatentsView for domain: '{domain}'...")
     url = "https://api.patentsview.org/patents/query"
     
@@ -20,7 +21,7 @@ def fetch_patents(domain: str, max_results: int = 15) -> List[Patent]:
             ]
         },
         "f": ["patent_title", "patent_abstract", "patent_number", "patent_date", "inventor_first_name", "inventor_last_name"],
-        "o": {"per_page": max_results}
+        "o": {"per_page": count}
     }
     
     patents = []
@@ -68,10 +69,10 @@ def fetch_patents(domain: str, max_results: int = 15) -> List[Patent]:
                     ))
         else:
             print(f"[Patent Fetcher] PatentsView API returned status code {response.status_code}. Using fallback generator...")
-            patents = get_mock_patents(domain, max_results)
+            patents = get_mock_patents(domain, count)
     except Exception as e:
         print(f"[Patent Fetcher] Error querying PatentsView API: {e}. Using fallback generator...")
-        patents = get_mock_patents(domain, max_results)
+        patents = get_mock_patents(domain, count)
         
     print(f"[Patent Fetcher] Returned {len(patents)} patents.")
     return patents

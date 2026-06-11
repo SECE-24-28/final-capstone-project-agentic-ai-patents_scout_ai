@@ -175,5 +175,114 @@ def get_fallback_json(prompt: str) -> str:
                 }
             ]
         return json.dumps(mock_topics)
+    elif "patent clusters" in prompt_lower or "patent_clusters" in prompt_lower or "patent_saturation" in prompt_lower or "patent count" in prompt_lower or "saturation" in prompt_lower:
+        # Check domain context
+        if "healthcare" in prompt_lower or "medical" in prompt_lower or "diagnostic" in prompt_lower:
+            mock_clusters = [
+                {
+                    "category": "Wearable Vital Sensors",
+                    "description": "Patented hardware for continuous telemetry of ECG and blood oxygen metrics.",
+                    "saturation": "High",
+                    "major_assignees": ["Medtronic", "Philips", "Apple"]
+                },
+                {
+                    "category": "AI Diagnostics Systems",
+                    "description": "Patents covering neural networks for computerized diagnostic scoring and anomaly alerts.",
+                    "saturation": "High",
+                    "major_assignees": ["Google Health", "IBM Watson", "Siemens Healthineers"]
+                },
+                {
+                    "category": "Telemedicine Data Platforms",
+                    "description": "Secure clinical teleconferencing and encrypted medical record database systems.",
+                    "saturation": "Medium",
+                    "major_assignees": ["Teladoc", "Amwell", "Epic Systems"]
+                }
+            ]
+        elif "vehicle" in prompt_lower or "battery" in prompt_lower or "charging" in prompt_lower:
+            mock_clusters = [
+                {
+                    "category": "Battery Cell Configuration",
+                    "description": "Patented modular cell configurations and internal link setups for EV battery pack efficiency.",
+                    "saturation": "High",
+                    "major_assignees": ["Tesla", "Panasonic", "CATL"]
+                },
+                {
+                    "category": "Thermal Regulation Grids",
+                    "description": "Patents covering pack-level cooling channels and heat sink setups for temperature safety.",
+                    "saturation": "High",
+                    "major_assignees": ["Tesla", "LG Energy Solution", "BYD"]
+                },
+                {
+                    "category": "Fast Charging Circuits",
+                    "description": "High-amperage charging interfaces and power regulation circuitry to protect active cells.",
+                    "saturation": "Medium",
+                    "major_assignees": ["ChargePoint", "ABB", "Siemens"]
+                }
+            ]
+        elif any(kw in prompt_lower for kw in ["cybersecurity", "security", "cryptography", "firewall", "malware", "network"]):
+            mock_clusters = [
+                {
+                    "category": "Network Security Gateways",
+                    "description": "Patented firewall filtering devices and hardware security appliances for enterprise routing.",
+                    "saturation": "High",
+                    "major_assignees": ["Cisco Systems", "Palo Alto Networks", "Fortinet"]
+                },
+                {
+                    "category": "Encrypted Communication Protocols",
+                    "description": "Cryptographic authentication patents protecting data transfers across distributed systems.",
+                    "saturation": "High",
+                    "major_assignees": ["RSA Security", "Symantec", "Microsoft"]
+                },
+                {
+                    "category": "Automated Threat Isolation",
+                    "description": "Intrusion detection software systems automatically isolating compromised virtual domains.",
+                    "saturation": "Medium",
+                    "major_assignees": ["CrowdStrike", "FireEye", "Splunk"]
+                }
+            ]
+        elif any(kw in prompt_lower for kw in ["ai", "machine learning", "deep learning", "neural", "intelligence", "language model"]):
+            mock_clusters = [
+                {
+                    "category": "Neural Net Optimization Hardware",
+                    "description": "Patented neuromorphic acceleration structures and logic gates designed for parallel tensor math.",
+                    "saturation": "High",
+                    "major_assignees": ["NVIDIA", "Intel", "Google"]
+                },
+                {
+                    "category": "Natural Language Processing Models",
+                    "description": "Patents covering speech-to-text decoding frameworks and attention-based weights systems.",
+                    "saturation": "High",
+                    "major_assignees": ["Google", "Microsoft", "Meta Platforms"]
+                },
+                {
+                    "category": "Automated Code Compilation",
+                    "description": "Generative code creation pipelines utilizing compiler validation to resolve syntax bugs.",
+                    "saturation": "Medium",
+                    "major_assignees": ["GitHub", "Microsoft", "OpenAI"]
+                }
+            ]
+        else:
+            # Default to Smart Agriculture
+            mock_clusters = [
+                {
+                    "category": "Automated Irrigation Valves",
+                    "description": "Patented flow control systems adjusting irrigation release based on sensor triggers.",
+                    "saturation": "High",
+                    "major_assignees": ["John Deere", "Lindsay Corporation", "Valmont Industries"]
+                },
+                {
+                    "category": "Soil Nutrient Sensors",
+                    "description": "Patents covering localized electro-chemical probes measuring moisture and NPK indexes.",
+                    "saturation": "High",
+                    "major_assignees": ["Trimble", "Raven Industries", "Climate Corporation"]
+                },
+                {
+                    "category": "Drone Ingestion Imaging",
+                    "description": "Spectral camera mounting rigs and software stitching scheduled field flight grids.",
+                    "saturation": "Medium",
+                    "major_assignees": ["DJI", "PrecisionHawk", "AeroVironment"]
+                }
+            ]
+        return json.dumps(mock_clusters)
         
     return "[]"
