@@ -33,9 +33,10 @@ if not logger.handlers:
 def patent_agent(state: AgentState) -> AgentState:
     """
     Patent Agent Node:
-    Retrieves patents related to a technology domain, analyzes them,
-    identifies major patent categories, estimates patent saturation levels,
-    and stores the structured results in AgentState.
+    Retrieves patents related to a technology domain from Google Patents,
+    indexes them into ChromaDB, retrieves the most relevant ones, analyzes them,
+    identifies major patent categories, estimates patent saturation levels, and
+    stores the structured results in AgentState.
 
     Args:
         state (AgentState): The current state of the agent execution.
@@ -71,7 +72,7 @@ def patent_agent(state: AgentState) -> AgentState:
         )
         logger.info(f"Stored {len(patents)} patents.")
 
-        # 4. Retrieve the most relevant patents using retrieve
+        # 4. Retrieve the most relevant patents using retrieve (top_k=15)
         logger.info("Retrieving top 15 relevant patents...")
         retrieved_docs = retrieve(
             query=state["domain"],
@@ -110,7 +111,6 @@ def patent_agent(state: AgentState) -> AgentState:
         patent_context = "\n\n".join(context_items)
 
         # 6. Load prompt template using pathlib.Path
-        # Use robust relative path fallback
         prompt_path = Path("backend/prompts/patent_agent.txt")
         if not prompt_path.exists():
             prompt_path = Path(__file__).resolve().parent.parent / "prompts" / "patent_agent.txt"

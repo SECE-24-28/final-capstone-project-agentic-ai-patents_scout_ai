@@ -5,10 +5,23 @@ Patent abstracts:
 {patents}
 
 For each category provide:
-- category: Short descriptive name (3-5 words)
+- category: Short descriptive name (3-5 words) E.g. "Smart Traffic Management"
 - description: One sentence explaining the patented technology area and the focus of the patents
 - saturation: Patent density/saturation level ('High', 'Medium', or 'Low')
 - major_assignees: List of top assignee names (companies or institutions) holding patents in this category
 
-Return ONLY a valid JSON array. No explanation, no markdown, no extra text.
-Format: [{"category":"...","description":"...","saturation":"...","major_assignees":["..."]}]
+Return ONLY a valid JSON array matching the format below. Do not include markdown code block syntax (like ```json), do not include any explanatory text, do not include trailing comments.
+
+Format:
+[
+  {
+    "category": "Smart Traffic Management",
+    "description": "AI systems for urban traffic optimization",
+    "saturation": "High",
+    "major_assignees": [
+      "IBM",
+      "Siemens",
+      "Cisco"
+    ]
+  }
+]

@@ -1,0 +1,1653 @@
+{
+  "results": {
+    "total_num_results": 124945,
+    "total_num_pages": 100,
+    "many_results": false,
+    "num_page": 0,
+    "cluster": [
+      {
+        "result": [
+          {
+            "id": "patent/CN104504784A/en",
+            "rank": 0,
+            "patent": {
+              "title": " Personal parking place system based on IC card",
+              "snippet": " The invention discloses a personal parking place system based on an IC card, a main technical scheme is characterized in that when a vehicle is driven close to a personal parking place of a vehicle owner, IC card induction equipment is capable of identifying the IC card of the vehicle, then the &hellip;",
+              "priority_date": "2014-11-15",
+              "filing_date": "2014-11-15",
+              "publication_date": "2015-04-08",
+              "inventor": "聂刚",
+              "assignee": "安徽省新方尊铸造科技有限公司",
+              "publication_number": "CN104504784A",
+              "language": "en",
+              "thumbnail": "",
+              "pdf": "0b/97/3b/d6b4bf5ca64c1a/CN104504784A.pdf",
+              "family_metadata": {
+                "aggregated": {
+                  "country_status": [
+                    {
+                      "country_code": "CN",
+                      "best_patent_stage": {
+                        "state": "ACTIVE"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "is_similar_document": true,
+            "entity_matches": {
+              "additional": 0
+            },
+            "measure_matches": {}
+          },
+          {
+            "id": "patent/CN203376473U/en",
+            "rank": 1,
+            "patent": {
+              "title": " Rfid indoor positioning system",
+              "snippet": " The utility model provides an RFID indoor positioning system comprising a plurality of electronic labels, a card reader, and a data processing module. The data processing module comprises a core control circuit and a wireless transmission module. The plurality of electronic labels are in an &hellip;",
+              "priority_date": "2013-07-22",
+              "filing_date": "2013-07-22",
+              "grant_date": "2014-01-01",
+              "publication_date": "2014-01-01",
+              "inventor": "西梁",
+              "assignee": "江苏物联网研究发展中心",
+              "publication_number": "CN203376473U",
+              "language": "en",
+              "thumbnail": "b3/8e/b6/484dd1fc2a15c8/HDA00003545074100021.png",
+              "pdf": "61/75/b5/95dd2c011c7b4d/CN203376473U.pdf",
+              "figures": [
+                {
+                  "thumbnail": "0f/5e/19/6c892f6e817c73/HDA00003545074100021.png",
+                  "full": "ee/16/25/55687bbf19d778/HDA00003545074100021.png"
+                },
+                {
+                  "thumbnail": "4e/6c/6d/66b7146a93b888/HDA00003545074100031.png",
+                  "full": "aa/4e/37/baa33f6f0b261f/HDA00003545074100031.png"
+                },
+                {
+                  "thumbnail": "fa/c4/fb/4e4bf800d8d468/HDA00003545074100041.png",
+                  "full": "95/75/98/0f51bb6c7dc8de/HDA00003545074100041.png"
+                }
+              ],
+              "family_metadata": {
+                "aggregated": {
+                  "country_status": [
+                    {
+                      "country_code": "CN",
+                      "best_patent_stage": {
+                        "state": "NOT_ACTIVE"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "is_similar_document": true,
+            "entity_matches": {
+              "additional": 0
+            },
+            "measure_matches": {}
+          },
+          {
+            "id": "patent/CN202033807U/en",
+            "rank": 2,
+            "patent": {
+              "title": " Multifunctional control management system of toll lane for toll road",
+              "snippet": " The utility model discloses a multifunctional control management system of a toll lane for a toll road. An industrial personal computer, a lane controller, an integrated circuit (IC) card reader, a special toll keyboard and a display which are in the direction of a lane entrance are installed &hellip;",
+              "priority_date": "2011-05-17",
+              "filing_date": "2011-05-17",
+              "grant_date": "2011-11-09",
+              "publication_date": "2011-11-09",
+              "inventor": "王铁中",
+              "assignee": "王铁中",
+              "publication_number": "CN202033807U",
+              "language": "en",
+              "thumbnail": "4c/9e/7b/35d8c78b7647ee/110517125407.png",
+              "pdf": "47/93/f1/31f100b488b962/CN202033807U.pdf",
+              "figures": [
+                {
+                  "thumbnail": "53/1b/02/51f5510b13d878/110517125407.png",
+                  "full": "6d/04/05/867478e6d75f96/110517125407.png"
+                },
+                {
+                  "thumbnail": "52/a5/f4/5ea8b7568b8e94/110517125410.png",
+                  "full": "22/37/e4/8112c080b10bce/110517125410.png"
+                }
+              ],
+              "family_metadata": {
+                "aggregated": {
+                  "country_status": [
+                    {
+                      "country_code": "CN",
+                      "best_patent_stage": {
+                        "state": "NOT_ACTIVE"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "is_similar_document": true,
+            "entity_matches": {
+              "additional": 0
+            },
+            "measure_matches": {}
+          },
+          {
+            "id": "patent/CN203180916U/en",
+            "rank": 3,
+            "patent": {
+              "title": " Multifunctional vehicle-mounted terminal",
+              "snippet": " The utility discloses a multifunctional vehicle-mounted terminal comprising a main control module used for controlling the work of the vehicle-mounted terminal, a vehicle-mounted unit connected with the main control module and used for transmitting exchange information with a road side unit to the &hellip;",
+              "priority_date": "2013-02-01",
+              "filing_date": "2013-02-01",
+              "grant_date": "2013-09-04",
+              "publication_date": "2013-09-04",
+              "inventor": "刘咏平",
+              "assignee": "深圳市金溢科技有限公司",
+              "publication_number": "CN203180916U",
+              "language": "en",
+              "thumbnail": "a1/0b/c4/a98e54533e32f3/HDA00002809866300011.png",
+              "pdf": "90/60/a6/7f1295eb8d5abd/CN203180916U.pdf",
+              "figures": [
+                {
+                  "thumbnail": "7f/cf/ac/351342c949d74f/HDA00002809866300011.png",
+                  "full": "d9/7a/da/cb2c6d99ea6d92/HDA00002809866300011.png"
+                },
+                {
+                  "thumbnail": "92/7a/51/d33ed585baaa0b/HDA00002809866300012.png",
+                  "full": "60/4f/fd/d994c8566a5750/HDA00002809866300012.png"
+                },
+                {
+                  "thumbnail": "7b/ab/12/48c52d7ced5268/HDA00002809866300013.png",
+                  "full": "42/e5/6d/36d8c8fc90b8c1/HDA00002809866300013.png"
+                },
+                {
+                  "thumbnail": "c3/f9/5a/36f662ec836fd5/HDA00002809866300021.png",
+                  "full": "6f/08/36/f05d5af4189423/HDA00002809866300021.png"
+                }
+              ],
+              "family_metadata": {
+                "aggregated": {
+                  "country_status": [
+                    {
+                      "country_code": "CN",
+                      "best_patent_stage": {
+                        "state": "NOT_ACTIVE"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "is_similar_document": true,
+            "entity_matches": {
+              "additional": 0
+            },
+            "measure_matches": {}
+          },
+          {
+            "id": "patent/CN102184580A/en",
+            "rank": 4,
+            "patent": {
+              "title": " Multi-functional toll collection lane controlling and managing system of toll &hellip;",
+              "snippet": " The invention discloses a multi-functional toll collection lane controlling and managing system of toll roads. An industrial personal computer, a car controlled machine, an IC (integrated circuit) card reader, a toll special keyboard and a display screen at an entrance lane direction are arranged &hellip;",
+              "priority_date": "2011-05-17",
+              "filing_date": "2011-05-17",
+              "publication_date": "2011-09-14",
+              "inventor": "王铁中",
+              "assignee": "王铁中",
+              "publication_number": "CN102184580A",
+              "language": "en",
+              "thumbnail": "68/2f/b1/d656a485de58c7/110517124631.png",
+              "pdf": "80/9f/4e/b5fc6e38d14524/CN102184580A.pdf",
+              "figures": [
+                {
+                  "thumbnail": "63/0a/ee/f07b0155506019/110517124631.png",
+                  "full": "2d/9d/c7/570e34bd06c62f/110517124631.png"
+                }
+              ],
+              "family_metadata": {
+                "aggregated": {
+                  "country_status": [
+                    {
+                      "country_code": "CN",
+                      "best_patent_stage": {
+                        "state": "ACTIVE"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "is_similar_document": true,
+            "entity_matches": {
+              "additional": 0
+            },
+            "measure_matches": {}
+          },
+          {
+            "id": "patent/CN202995827U/en",
+            "rank": 5,
+            "patent": {
+              "title": " Card reading device and system used for ambiguous expressway route toll &hellip;",
+              "snippet": " The utility model discloses a card reading device and system used for an ambiguous expressway route toll collection system. The card reading device comprises a first antenna, a double interface CPU card reader and a controller. The controller, the double interface CPU card reader and the first &hellip;",
+              "priority_date": "2011-09-07",
+              "filing_date": "2012-09-06",
+              "grant_date": "2013-06-12",
+              "publication_date": "2013-06-12",
+              "inventor": "徐根华",
+              "assignee": "深圳市金溢科技有限公司",
+              "publication_number": "CN202995827U",
+              "language": "en",
+              "thumbnail": "3c/74/29/5bf06be05723d1/HDA00002107803700011.png",
+              "pdf": "04/5a/80/dc6818ea8ad7cc/CN202995827U.pdf",
+              "figures": [
+                {
+                  "thumbnail": "14/31/fc/584d0e20fb7ff9/HDA00002107803700011.png",
+                  "full": "90/27/28/1b8bbdf07c466c/HDA00002107803700011.png"
+                },
+                {
+                  "thumbnail": "3f/a6/7a/efaa1965c574cc/HDA00002107803700021.png",
+                  "full": "b1/5b/c4/19014f2aee9966/HDA00002107803700021.png"
+                },
+                {
+                  "thumbnail": "b9/d0/f8/0b79ff0f9a556c/HDA00002107803700031.png",
+                  "full": "52/85/74/acf1b2795f32f0/HDA00002107803700031.png"
+                },
+                {
+                  "thumbnail": "d7/9e/dd/388d27e933566b/HDA00002107803700041.png",
+                  "full": "a2/25/69/7dc5525ce1e7d3/HDA00002107803700041.png"
+                },
+                {
+                  "thumbnail": "52/98/68/56244ffb866e24/HDA00002107803700051.png",
+                  "full": "32/08/1f/03b6ad91ea3d48/HDA00002107803700051.png"
+                }
+              ],
+              "family_metadata": {
+                "aggregated": {
+                  "country_status": [
+                    {
+                      "country_code": "CN",
+                      "best_patent_stage": {
+                        "state": "ACTIVE"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "is_similar_document": true,
+            "entity_matches": {
+              "additional": 0
+            },
+            "measure_matches": {}
+          },
+          {
+            "id": "patent/CN104933768A/en",
+            "rank": 6,
+            "patent": {
+              "title": " Highway path identification pass and highway path identification method based &hellip;",
+              "snippet": " The invention relates to a highway path identification pass and a highway path identification method based on the ID of a GSM base station. The method includes the following steps: when a vehicle enters a toll station, a pass is activated, and a toll collector reads the residual electricity in the &hellip;",
+              "priority_date": "2015-06-30",
+              "filing_date": "2015-06-30",
+              "publication_date": "2015-09-23",
+              "inventor": "钱怀风",
+              "assignee": "江西方兴科技有限公司",
+              "publication_number": "CN104933768A",
+              "language": "en",
+              "thumbnail": "",
+              "pdf": "61/50/b0/b26213a83867f0/CN104933768A.pdf",
+              "family_metadata": {
+                "aggregated": {
+                  "country_status": [
+                    {
+                      "country_code": "CN",
+                      "best_patent_stage": {
+                        "state": "ACTIVE"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "is_similar_document": true,
+            "entity_matches": {
+              "additional": 0
+            },
+            "measure_matches": {}
+          },
+          {
+            "id": "patent/CN201159914Y/en",
+            "rank": 7,
+            "patent": {
+              "title": " Highway ETC toll collection system capable of recognizing polysemantic path",
+              "snippet": " The utility model discloses a freeway ETC charging system that can identify ambiguous paths, which comprises a path identification card module, an ETC vehicle charging module, an ETC reader, an electronic route sign and a background support system; a data communication port of the path &hellip;",
+              "priority_date": "2008-01-25",
+              "filing_date": "2008-01-25",
+              "grant_date": "2008-12-03",
+              "publication_date": "2008-12-03",
+              "inventor": "丁丰其",
+              "assignee": "丁丰其",
+              "publication_number": "CN201159914Y",
+              "language": "en",
+              "thumbnail": "00/e9/00/a71b2ab7beb025/Y20082008256000071.png",
+              "pdf": "a0/df/c9/6bb3c924351ba6/CN201159914Y.pdf",
+              "figures": [
+                {
+                  "thumbnail": "a2/02/f4/a065ea62d8a671/Y20082008256000071.png",
+                  "full": "77/93/bb/6cc2c5ac3bfc99/Y20082008256000071.png"
+                }
+              ],
+              "family_metadata": {
+                "aggregated": {
+                  "country_status": [
+                    {
+                      "country_code": "CN",
+                      "best_patent_stage": {
+                        "state": "NOT_ACTIVE"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "is_similar_document": true,
+            "entity_matches": {
+              "additional": 0
+            },
+            "measure_matches": {}
+          },
+          {
+            "id": "patent/CN104346854A/en",
+            "rank": 8,
+            "patent": {
+              "title": " Private parking system based on two-dimensional code recognition",
+              "snippet": " The invention discloses a private parking system based on two-dimensional code recognition. The main technical scheme is that when a vehicle gets close to a private parking lot, a two-dimensional code scanner scans the two-dimensional code which is pasted on the windshield of the vehicle, or &hellip;",
+              "priority_date": "2014-11-15",
+              "filing_date": "2014-11-15",
+              "publication_date": "2015-02-11",
+              "inventor": "聂刚",
+              "assignee": "安徽省新方尊铸造科技有限公司",
+              "publication_number": "CN104346854A",
+              "language": "en",
+              "thumbnail": "",
+              "pdf": "2b/99/42/df11e09644a040/CN104346854A.pdf",
+              "family_metadata": {
+                "aggregated": {
+                  "country_status": [
+                    {
+                      "country_code": "CN",
+                      "best_patent_stage": {
+                        "state": "ACTIVE"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "is_similar_document": true,
+            "entity_matches": {
+              "additional": 0
+            },
+            "measure_matches": {}
+          },
+          {
+            "id": "patent/CN206075557U/en",
+            "rank": 9,
+            "patent": {
+              "title": " A kind of empty vehicle parking position of parking lot intellectualized &hellip;",
+              "snippet": " This utility model is related to a kind of empty vehicle parking position of parking lot intellectualized management system, including access card, march into the arena card reader, controlling organization, gate inhibition and server, described access card can be with card reader electric &hellip;",
+              "priority_date": "2016-08-29",
+              "filing_date": "2016-08-29",
+              "grant_date": "2017-04-05",
+              "publication_date": "2017-04-05",
+              "inventor": "郝晓谷",
+              "assignee": "郝晓谷",
+              "publication_number": "CN206075557U",
+              "language": "en",
+              "thumbnail": "",
+              "pdf": "ab/0e/19/6e031a2fe168b0/CN206075557U.pdf",
+              "family_metadata": {
+                "aggregated": {
+                  "country_status": [
+                    {
+                      "country_code": "CN",
+                      "best_patent_stage": {
+                        "state": "NOT_ACTIVE"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "is_similar_document": true,
+            "entity_matches": {
+              "additional": 0
+            },
+            "measure_matches": {}
+          }
+        ]
+      }
+    ],
+    "chem_exhausted": false,
+    "summary": {
+      "assignee": [
+        {
+          "key": "Total",
+          "value": 1000,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 10
+            },
+            {
+              "key": "2022-2025",
+              "value": 176
+            },
+            {
+              "key": "2019-2022",
+              "value": 548
+            },
+            {
+              "key": "2016-2019",
+              "value": 205
+            },
+            {
+              "key": "2013-2016",
+              "value": 62
+            },
+            {
+              "key": "2010-2013",
+              "value": 16
+            },
+            {
+              "key": "2007-2010",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "key": "三星电子株式会社",
+          "value": 115,
+          "frequency": [
+            {
+              "key": "2019-2022",
+              "value": 58
+            },
+            {
+              "key": "2016-2019",
+              "value": 56
+            },
+            {
+              "key": "2013-2016",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "key": "Samsung Electronics Co., Ltd.",
+          "value": 96,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 2
+            },
+            {
+              "key": "2022-2025",
+              "value": 22
+            },
+            {
+              "key": "2019-2022",
+              "value": 59
+            },
+            {
+              "key": "2016-2019",
+              "value": 13
+            },
+            {
+              "key": "2013-2016",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "key": "Lg Electronics Inc.",
+          "value": 95,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 2
+            },
+            {
+              "key": "2022-2025",
+              "value": 15
+            },
+            {
+              "key": "2019-2022",
+              "value": 80
+            }
+          ]
+        },
+        {
+          "key": "Lg电子株式会社",
+          "value": 61,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 3
+            },
+            {
+              "key": "2019-2022",
+              "value": 60
+            }
+          ]
+        },
+        {
+          "key": "Cisco Technology, Inc.",
+          "value": 45,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 1
+            },
+            {
+              "key": "2019-2022",
+              "value": 1
+            },
+            {
+              "key": "2016-2019",
+              "value": 13
+            },
+            {
+              "key": "2013-2016",
+              "value": 24
+            },
+            {
+              "key": "2010-2013",
+              "value": 7
+            }
+          ]
+        },
+        {
+          "key": "Intel Corporation",
+          "value": 42,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 18
+            },
+            {
+              "key": "2019-2022",
+              "value": 25
+            }
+          ]
+        },
+        {
+          "key": "엘지전자 주식회사",
+          "value": 39,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 1
+            },
+            {
+              "key": "2019-2022",
+              "value": 39
+            }
+          ]
+        },
+        {
+          "key": "삼성전자 주식회사",
+          "value": 37,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 5
+            },
+            {
+              "key": "2019-2022",
+              "value": 14
+            },
+            {
+              "key": "2016-2019",
+              "value": 19
+            }
+          ]
+        },
+        {
+          "key": "Samsung Electronics Co., Ltd",
+          "value": 26,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 4
+            },
+            {
+              "key": "2019-2022",
+              "value": 12
+            },
+            {
+              "key": "2016-2019",
+              "value": 10
+            },
+            {
+              "key": "2013-2016",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "Lg 电子株式会社",
+          "value": 25,
+          "frequency": [
+            {
+              "key": "2019-2022",
+              "value": 26
+            }
+          ]
+        },
+        {
+          "key": "삼성전자주식회사",
+          "value": 23,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 3
+            },
+            {
+              "key": "2022-2025",
+              "value": 4
+            },
+            {
+              "key": "2019-2022",
+              "value": 5
+            },
+            {
+              "key": "2016-2019",
+              "value": 11
+            },
+            {
+              "key": "2013-2016",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "Samsung Electronics Co Ltd",
+          "value": 11,
+          "frequency": [
+            {
+              "key": "2019-2022",
+              "value": 4
+            },
+            {
+              "key": "2016-2019",
+              "value": 7
+            },
+            {
+              "key": "2013-2016",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "INTEL Corporation",
+          "value": 10,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 5
+            },
+            {
+              "key": "2019-2022",
+              "value": 6
+            }
+          ]
+        },
+        {
+          "key": "Chengdu Qinchuan Iot Technology Co., Ltd.",
+          "value": 8,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 9
+            }
+          ]
+        },
+        {
+          "key": "エルジー エレクトロニクス インコーポレイティド",
+          "value": 6,
+          "frequency": [
+            {
+              "key": "2019-2022",
+              "value": 7
+            }
+          ]
+        },
+        {
+          "key": "平安国际智慧城市科技股份有限公司",
+          "value": 5,
+          "frequency": [
+            {
+              "key": "2019-2022",
+              "value": 6
+            }
+          ]
+        },
+        {
+          "key": "Bao Tran",
+          "value": 5,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 2
+            },
+            {
+              "key": "2019-2022",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "key": "平安科技（深圳）有限公司",
+          "value": 5,
+          "frequency": [
+            {
+              "key": "2019-2022",
+              "value": 6
+            }
+          ]
+        },
+        {
+          "key": "Swiss Reinsurance Company Ltd.",
+          "value": 4,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 2
+            },
+            {
+              "key": "2019-2022",
+              "value": 1
+            },
+            {
+              "key": "2016-2019",
+              "value": 2
+            }
+          ]
+        }
+      ],
+      "inventor": [
+        {
+          "key": "Total",
+          "value": 1000,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 10
+            },
+            {
+              "key": "2022-2025",
+              "value": 176
+            },
+            {
+              "key": "2019-2022",
+              "value": 548
+            },
+            {
+              "key": "2016-2019",
+              "value": 205
+            },
+            {
+              "key": "2013-2016",
+              "value": 62
+            },
+            {
+              "key": "2010-2013",
+              "value": 16
+            },
+            {
+              "key": "2007-2010",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "key": "Jean-Philippe Vasseur",
+          "value": 38,
+          "frequency": [
+            {
+              "key": "2019-2022",
+              "value": 1
+            },
+            {
+              "key": "2016-2019",
+              "value": 10
+            },
+            {
+              "key": "2013-2016",
+              "value": 21
+            },
+            {
+              "key": "2010-2013",
+              "value": 7
+            }
+          ]
+        },
+        {
+          "key": "Francesc Guim Bernat",
+          "value": 28,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 12
+            },
+            {
+              "key": "2019-2022",
+              "value": 17
+            }
+          ]
+        },
+        {
+          "key": "金成勋",
+          "value": 26,
+          "frequency": [
+            {
+              "key": "2019-2022",
+              "value": 13
+            },
+            {
+              "key": "2016-2019",
+              "value": 13
+            },
+            {
+              "key": "2013-2016",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "姜智源",
+          "value": 23,
+          "frequency": [
+            {
+              "key": "2019-2022",
+              "value": 24
+            }
+          ]
+        },
+        {
+          "key": "Soenghun KIM",
+          "value": 23,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 5
+            },
+            {
+              "key": "2019-2022",
+              "value": 15
+            },
+            {
+              "key": "2016-2019",
+              "value": 3
+            },
+            {
+              "key": "2013-2016",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "Jinyoung Oh",
+          "value": 21,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 6
+            },
+            {
+              "key": "2019-2022",
+              "value": 12
+            },
+            {
+              "key": "2016-2019",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "key": "Ned M. Smith",
+          "value": 21,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 10
+            },
+            {
+              "key": "2019-2022",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "key": "Jeongho Yeo",
+          "value": 20,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 4
+            },
+            {
+              "key": "2019-2022",
+              "value": 12
+            },
+            {
+              "key": "2016-2019",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "key": "Hoondong NOH",
+          "value": 20,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 1
+            },
+            {
+              "key": "2022-2025",
+              "value": 2
+            },
+            {
+              "key": "2019-2022",
+              "value": 14
+            },
+            {
+              "key": "2016-2019",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "key": "Kshitij Arun Doshi",
+          "value": 19,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 8
+            },
+            {
+              "key": "2019-2022",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "key": "Hanbyul Seo",
+          "value": 18,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 4
+            },
+            {
+              "key": "2019-2022",
+              "value": 15
+            }
+          ]
+        },
+        {
+          "key": "Seungmin Lee",
+          "value": 17,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 2
+            },
+            {
+              "key": "2019-2022",
+              "value": 16
+            }
+          ]
+        },
+        {
+          "key": "Cheolkyu Shin",
+          "value": 16,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 3
+            },
+            {
+              "key": "2019-2022",
+              "value": 11
+            },
+            {
+              "key": "2016-2019",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "key": "Youngdae Lee",
+          "value": 15,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 1
+            },
+            {
+              "key": "2019-2022",
+              "value": 15
+            }
+          ]
+        },
+        {
+          "key": "Pascal Thubert",
+          "value": 15,
+          "frequency": [
+            {
+              "key": "2016-2019",
+              "value": 6
+            },
+            {
+              "key": "2013-2016",
+              "value": 9
+            },
+            {
+              "key": "2010-2013",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "吴振荣",
+          "value": 15,
+          "frequency": [
+            {
+              "key": "2019-2022",
+              "value": 6
+            },
+            {
+              "key": "2016-2019",
+              "value": 10
+            }
+          ]
+        },
+        {
+          "key": "Seunghoon Choi",
+          "value": 15,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 1
+            },
+            {
+              "key": "2019-2022",
+              "value": 10
+            },
+            {
+              "key": "2016-2019",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "key": "吕贞镐",
+          "value": 15,
+          "frequency": [
+            {
+              "key": "2019-2022",
+              "value": 5
+            },
+            {
+              "key": "2016-2019",
+              "value": 11
+            }
+          ]
+        },
+        {
+          "key": "李英大",
+          "value": 14,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 2
+            },
+            {
+              "key": "2019-2022",
+              "value": 13
+            }
+          ]
+        }
+      ],
+      "cpc": [
+        {
+          "key": "Total",
+          "value": 1000,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 10
+            },
+            {
+              "key": "2022-2025",
+              "value": 176
+            },
+            {
+              "key": "2019-2022",
+              "value": 548
+            },
+            {
+              "key": "2016-2019",
+              "value": 205
+            },
+            {
+              "key": "2013-2016",
+              "value": 62
+            },
+            {
+              "key": "2010-2013",
+              "value": 16
+            },
+            {
+              "key": "2007-2010",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "key": "H04W",
+          "value": 631,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 9
+            },
+            {
+              "key": "2022-2025",
+              "value": 90
+            },
+            {
+              "key": "2019-2022",
+              "value": 379
+            },
+            {
+              "key": "2016-2019",
+              "value": 137
+            },
+            {
+              "key": "2013-2016",
+              "value": 25
+            },
+            {
+              "key": "2010-2013",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "key": "H04L",
+          "value": 542,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 5
+            },
+            {
+              "key": "2022-2025",
+              "value": 89
+            },
+            {
+              "key": "2019-2022",
+              "value": 301
+            },
+            {
+              "key": "2016-2019",
+              "value": 117
+            },
+            {
+              "key": "2013-2016",
+              "value": 32
+            },
+            {
+              "key": "2010-2013",
+              "value": 8
+            },
+            {
+              "key": "2007-2010",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "H04B",
+          "value": 188,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 1
+            },
+            {
+              "key": "2022-2025",
+              "value": 26
+            },
+            {
+              "key": "2019-2022",
+              "value": 112
+            },
+            {
+              "key": "2016-2019",
+              "value": 45
+            },
+            {
+              "key": "2013-2016",
+              "value": 8
+            }
+          ]
+        },
+        {
+          "key": "G06F",
+          "value": 179,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 1
+            },
+            {
+              "key": "2022-2025",
+              "value": 49
+            },
+            {
+              "key": "2019-2022",
+              "value": 93
+            },
+            {
+              "key": "2016-2019",
+              "value": 29
+            },
+            {
+              "key": "2013-2016",
+              "value": 10
+            },
+            {
+              "key": "2007-2010",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "Y02D",
+          "value": 122,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 1
+            },
+            {
+              "key": "2022-2025",
+              "value": 16
+            },
+            {
+              "key": "2019-2022",
+              "value": 74
+            },
+            {
+              "key": "2016-2019",
+              "value": 23
+            },
+            {
+              "key": "2013-2016",
+              "value": 10
+            },
+            {
+              "key": "2010-2013",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "G06N",
+          "value": 117,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 39
+            },
+            {
+              "key": "2019-2022",
+              "value": 69
+            },
+            {
+              "key": "2016-2019",
+              "value": 7
+            },
+            {
+              "key": "2013-2016",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "key": "G06Q",
+          "value": 102,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 1
+            },
+            {
+              "key": "2022-2025",
+              "value": 38
+            },
+            {
+              "key": "2019-2022",
+              "value": 36
+            },
+            {
+              "key": "2016-2019",
+              "value": 22
+            },
+            {
+              "key": "2013-2016",
+              "value": 6
+            },
+            {
+              "key": "2010-2013",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "G08G",
+          "value": 53,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 1
+            },
+            {
+              "key": "2022-2025",
+              "value": 17
+            },
+            {
+              "key": "2019-2022",
+              "value": 21
+            },
+            {
+              "key": "2016-2019",
+              "value": 14
+            },
+            {
+              "key": "2013-2016",
+              "value": 1
+            },
+            {
+              "key": "2010-2013",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "G06V",
+          "value": 40,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 17
+            },
+            {
+              "key": "2019-2022",
+              "value": 20
+            },
+            {
+              "key": "2016-2019",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "key": "G06T",
+          "value": 40,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 6
+            },
+            {
+              "key": "2019-2022",
+              "value": 26
+            },
+            {
+              "key": "2016-2019",
+              "value": 8
+            },
+            {
+              "key": "2013-2016",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "H04J",
+          "value": 35,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 1
+            },
+            {
+              "key": "2022-2025",
+              "value": 4
+            },
+            {
+              "key": "2019-2022",
+              "value": 16
+            },
+            {
+              "key": "2016-2019",
+              "value": 10
+            },
+            {
+              "key": "2013-2016",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "key": "H04N",
+          "value": 34,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 5
+            },
+            {
+              "key": "2019-2022",
+              "value": 21
+            },
+            {
+              "key": "2016-2019",
+              "value": 9
+            }
+          ]
+        },
+        {
+          "key": "G01S",
+          "value": 26,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 4
+            },
+            {
+              "key": "2019-2022",
+              "value": 13
+            },
+            {
+              "key": "2016-2019",
+              "value": 9
+            },
+            {
+              "key": "2013-2016",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "G16Y",
+          "value": 25,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 14
+            },
+            {
+              "key": "2019-2022",
+              "value": 9
+            },
+            {
+              "key": "2016-2019",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "key": "G08B",
+          "value": 22,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 12
+            },
+            {
+              "key": "2019-2022",
+              "value": 7
+            },
+            {
+              "key": "2016-2019",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "key": "Y02A",
+          "value": 22,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 13
+            },
+            {
+              "key": "2019-2022",
+              "value": 7
+            },
+            {
+              "key": "2016-2019",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "key": "Y04S",
+          "value": 21,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 3
+            },
+            {
+              "key": "2019-2022",
+              "value": 7
+            },
+            {
+              "key": "2016-2019",
+              "value": 7
+            },
+            {
+              "key": "2013-2016",
+              "value": 4
+            },
+            {
+              "key": "2010-2013",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "key": "G05B",
+          "value": 20,
+          "frequency": [
+            {
+              "key": "2022-2025",
+              "value": 4
+            },
+            {
+              "key": "2019-2022",
+              "value": 8
+            },
+            {
+              "key": "2016-2019",
+              "value": 7
+            },
+            {
+              "key": "2013-2016",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "key": "G01C",
+          "value": 17,
+          "frequency": [
+            {
+              "key": "2025-2028",
+              "value": 1
+            },
+            {
+              "key": "2022-2025",
+              "value": 3
+            },
+            {
+              "key": "2019-2022",
+              "value": 5
+            },
+            {
+              "key": "2016-2019",
+              "value": 6
+            },
+            {
+              "key": "2013-2016",
+              "value": 2
+            },
+            {
+              "key": "2010-2013",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    "landscape": {
+      "related_landscapes": [
+        {
+          "name": "Engineering & Computer Science",
+          "landscape_type": "AREA"
+        },
+        {
+          "name": "Signal Processing",
+          "landscape_type": "AREA"
+        },
+        {
+          "name": "Computer Networks & Wireless Communication",
+          "landscape_type": "AREA"
+        }
+      ]
+    }
+  }
+}

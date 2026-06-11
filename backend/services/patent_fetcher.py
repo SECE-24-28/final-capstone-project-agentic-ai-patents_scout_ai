@@ -1,7 +1,9 @@
 import os
+import sys
 import logging
 import requests
 from typing import List, Optional
+from langdetect import detect
 from backend.models.pydantic_models import Patent
 
 logger = logging.getLogger("PatentFetcher")
@@ -12,11 +14,32 @@ if not logger.handlers:
     logger.addHandler(handler)
     logger.setLevel(logging.INFO)
 
+def is_english(title: str, abstract: str) -> bool:
+    """
+    Checks if a patent's title and abstract are in English.
+    Rejects any text containing CJK characters or identified by langdetect as non-English.
+    """
+    def detect_lang(text: str) -> str:
+        if not text or not text.strip():
+            return 'en'
+        # Detect CJK characters (Chinese, Japanese, Korean) and reject immediately
+        for char in text:
+            if '\u4e00' <= char <= '\u9fff' or '\u3040' <= char <= '\u30ff' or '\uac00' <= char <= '\ud7af':
+                return 'non-en'
+        try:
+            return detect(text)
+        except Exception:
+            # Treat short or numerical snippets as English if no CJK character is present
+            return 'en'
+
+    title_lang = detect_lang(title)
+    abstract_lang = detect_lang(abstract)
+    return title_lang == 'en' and abstract_lang == 'en'
+
 def fetch_patents(domain: str, limit: int = 60, max_results: Optional[int] = None) -> List[Patent]:
     """
-    Fetch patents related to a technology domain.
-    Attempts USPTO Open Data Portal first, then falls back to Lens.org if USPTO fails.
-    If both fail, raises an error.
+    Fetch patents related to a technology domain using Google Patents XHR query.
+    Filters out non-English patents and returns a list of normalized Patent objects.
 
     Args:
         domain (str): The search query or technology domain.
@@ -24,210 +47,89 @@ def fetch_patents(domain: str, limit: int = 60, max_results: Optional[int] = Non
         max_results (Optional[int]): Deprecated parameter for backward compatibility.
 
     Returns:
-        List[Patent]: List of normalized Patent objects.
+        List[Patent]: List of normalized, English-only Patent objects.
     """
     actual_limit = limit if max_results is None else max_results
     
-    # 1. Attempt USPTO Open Data Portal
-    print("[Patent Fetcher] Querying USPTO...")
-    logger.info("Attempting USPTO Open Data Portal retrieval...")
-    try:
-        uspto_patents = _fetch_uspto(domain, actual_limit)
-        print(f"[Patent Fetcher] USPTO returned {len(uspto_patents)} patents")
-        logger.info(f"Successfully retrieved {len(uspto_patents)} patents from USPTO.")
-        return uspto_patents
-    except Exception as uspto_err:
-        print("[Patent Fetcher] USPTO failed")
-        logger.warning(f"USPTO retrieval failed: {uspto_err}")
-        
-    # 2. Attempt Lens.org
-    print("[Patent Fetcher] Switching to Lens.org")
-    logger.info("Attempting Lens.org retrieval...")
-    try:
-        lens_patents = _fetch_lens(domain, actual_limit)
-        print(f"[Patent Fetcher] Lens.org returned {len(lens_patents)} patents")
-        logger.info(f"Successfully retrieved {len(lens_patents)} patents from Lens.org.")
-        return lens_patents
-    except Exception as lens_err:
-        logger.error(f"Lens.org retrieval failed: {lens_err}")
-        
-    # 3. Both failed
-    print("[Patent Fetcher] No patent data available")
-    logger.error("Both USPTO and Lens.org patent retrieval failed.")
-    raise RuntimeError("Failed to retrieve patent data from both USPTO and Lens.org.")
+    print(f"[Patent Fetcher] Searching Google Patents for: {domain}")
+    logger.info(f"Querying Google Patents for domain: {domain}")
 
-def _fetch_uspto(domain: str, limit: int) -> List[Patent]:
-    """Helper to fetch from USPTO Open Data Portal."""
-    uspto_key = os.getenv("USPTO_API_KEY") or os.getenv("PATENTSVIEW_API_KEY")
-    if not uspto_key:
-        raise ValueError("USPTO API Key (USPTO_API_KEY or PATENTSVIEW_API_KEY) is not configured in .env.")
-        
-    url = "https://api.uspto.gov/api/v1/patent/applications/search"
+    # Request slightly more patents to compensate for non-English filtering
+    num_to_request = min(100, actual_limit * 2)
+    query_param = f"q={requests.utils.quote(domain)}&num={num_to_request}"
+    xhr_url = f"https://patents.google.com/xhr/query?url={requests.utils.quote(query_param)}&exp="
+
     headers = {
-        "x-api-key": uspto_key,
-        "accept": "application/json"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://patents.google.com/",
     }
-    params = {
-        "q": domain,
-        "limit": limit
-    }
-    
-    response = requests.get(url, headers=headers, params=params, timeout=15)
-    if response.status_code != 200:
-        raise requests.HTTPError(f"USPTO API returned status code {response.status_code}: {response.text}")
-        
-    data = response.json()
-    results = data.get("patentApplicationSearchResults") or data.get("results") or data.get("data") or []
-    
-    patents = []
-    for item in results:
-        meta = item.get("applicationMetaData", {})
-        title = meta.get("inventionTitle", "Unknown Title")
-        
-        # Abstract extraction
-        abstract = "No abstract available"
-        raw_abstract = item.get("abstractText") or meta.get("abstractText")
-        if isinstance(raw_abstract, list) and len(raw_abstract) > 0:
-            abstract = str(raw_abstract[0])
-        elif raw_abstract:
-            abstract = str(raw_abstract)
-            
-        patent_number = meta.get("patentNumber") or item.get("applicationNumberText") or "Unknown Patent ID"
-        
-        # Year extraction
+
+    try:
+        response = requests.get(xhr_url, headers=headers, timeout=15)
+        if response.status_code != 200:
+            logger.error(f"Google Patents returned HTTP status: {response.status_code}")
+            print(f"[Patent Fetcher] Google Patents query failed with status: {response.status_code}")
+            return []
+
+        data = response.json()
+    except Exception as err:
+        logger.error(f"Failed to retrieve/parse Google Patents: {err}")
+        print(f"[Patent Fetcher] Error retrieving patents: {err}")
+        return []
+
+    # Extract patents list from XHR response JSON structure
+    clusters = data.get("results", {}).get("cluster", [])
+    raw_list = []
+    if clusters and isinstance(clusters, list):
+        raw_list = clusters[0].get("result", [])
+
+    print(f"[Patent Fetcher] Retrieved {len(raw_list)} raw patents")
+
+    english_patents: List[Patent] = []
+    non_english_count = 0
+
+    for item in raw_list:
+        patent_info = item.get("patent", {})
+        title = patent_info.get("title", "").strip()
+        abstract = patent_info.get("snippet", "").strip()
+
+        # Reject non-English patents
+        if not is_english(title, abstract):
+            non_english_count += 1
+            continue
+
+        patent_number = patent_info.get("publication_number", "Unknown Patent ID").strip()
+        assignee = patent_info.get("assignee", "Unknown Assignee").strip()
+
+        # Extract Year
+        pub_date = patent_info.get("publication_date", "")
         year = None
-        date_str = meta.get("filingDate") or meta.get("grantDate") or meta.get("publicationDate")
-        if date_str and isinstance(date_str, str):
+        if pub_date and isinstance(pub_date, str):
             try:
-                year = int(date_str.split("-")[0])
+                year = int(pub_date.split("-")[0])
             except ValueError:
                 pass
-                
-        # Assignee extraction
-        assignee = (
-            meta.get("firstApplicantName") or
-            meta.get("assigneeName") or
-            meta.get("firstInventorName") or
-            "Unknown Assignee"
-        )
-        
-        # Construct and add dynamic fields for compatibility
-        p = Patent(
-            title=title,
-            abstract=abstract,
-            inventors=[assignee],
-            year=year,
-            patent_id=patent_number,
-            source="USPTO"
-        )
-        object.__setattr__(p, 'assignee', assignee)
-        object.__setattr__(p, 'patent_number', patent_number)
-        patents.append(p)
-        
-    return patents
 
-def _fetch_lens(domain: str, limit: int) -> List[Patent]:
-    """Helper to fetch from Lens.org."""
-    lens_key = os.getenv("LENS_API_KEY")
-    if not lens_key:
-        raise ValueError("Lens.org API Key (LENS_API_KEY) is not configured in .env.")
-        
-    url = "https://api.lens.org/patent/search"
-    headers = {
-        "Authorization": f"Bearer {lens_key}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "query": {
-            "query_string": {
-                "query": domain
-            }
-        },
-        "size": limit,
-        "include": [
-            "lens_id",
-            "doc_number",
-            "date_published",
-            "biblio.invention_title",
-            "biblio.parties.applicants",
-            "abstract"
-        ]
-    }
-    
-    response = requests.post(url, headers=headers, json=payload, timeout=15)
-    if response.status_code != 200:
-        raise requests.HTTPError(f"Lens.org API returned status code {response.status_code}: {response.text}")
-        
-    data = response.json()
-    results = data.get("data") or data.get("results") or []
-    
-    patents = []
-    for item in results:
-        biblio = item.get("biblio", {})
-        
-        # Title extraction
-        title = "Unknown Title"
-        titles = biblio.get("invention_title", [])
-        if isinstance(titles, list) and len(titles) > 0:
-            if isinstance(titles[0], dict):
-                title = titles[0].get("text", "Unknown Title")
-            else:
-                title = str(titles[0])
-        elif isinstance(titles, str):
-            title = titles
-            
-        # Abstract extraction
-        abstract = "No abstract available"
-        abstracts = item.get("abstract", [])
-        if isinstance(abstracts, list) and len(abstracts) > 0:
-            if isinstance(abstracts[0], dict):
-                abstract = abstracts[0].get("text", "No abstract available")
-            else:
-                abstract = str(abstracts[0])
-        elif isinstance(abstracts, str):
-            abstract = abstracts
-            
-        patent_number = item.get("doc_number") or item.get("lens_id") or "Unknown Patent ID"
-        
-        # Year extraction
-        year = None
-        pub_year = biblio.get("publication_year")
-        if pub_year:
-            try:
-                year = int(pub_year)
-            except (ValueError, TypeError):
-                pass
-        if not year:
-            date_pub = item.get("date_published")
-            if date_pub and isinstance(date_pub, str):
-                try:
-                    year = int(date_pub.split("-")[0])
-                except ValueError:
-                    pass
-                    
-        # Assignee extraction
-        applicants = biblio.get("parties", {}).get("applicants", [])
-        assignee_names = []
-        if applicants and isinstance(applicants, list):
-            for app in applicants:
-                name = None
-                if isinstance(app, dict):
-                    name = app.get("name") or app.get("extracted_name", {}).get("value")
-                if name:
-                    assignee_names.append(str(name))
-        assignee = ", ".join(assignee_names) if assignee_names else "Unknown Assignee"
-        
-        # Construct and add dynamic fields for compatibility
+        # Construct and dynamic attributes for testing/compatibility requirements
         p = Patent(
             title=title,
             abstract=abstract,
             inventors=[assignee],
             year=year,
             patent_id=patent_number,
-            source="Lens.org"
+            source="google_patents"
         )
         object.__setattr__(p, 'assignee', assignee)
         object.__setattr__(p, 'patent_number', patent_number)
-        patents.append(p)
         
-    return patents
+        english_patents.append(p)
+
+    print(f"[Patent Fetcher] Filtered {non_english_count} non-English patents")
+    
+    # Truncate to the requested limit
+    final_patents = english_patents[:actual_limit]
+    print(f"[Patent Fetcher] Returning {len(final_patents)} English patents")
+
+    return final_patents
