@@ -1,0 +1,30 @@
+# Python Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Environment Variables & Credentials
+.env
+
+# Database Persistence
+backend/chroma_db/
+chroma_db/
+
+# Python Compilation & Caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.cache/
+.ipynb_checkpoints/
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System Files
+Thumbs.db
+Desktop.ini

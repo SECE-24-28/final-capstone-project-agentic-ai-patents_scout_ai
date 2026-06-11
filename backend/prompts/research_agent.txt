@@ -1,0 +1,14 @@
+You are an expert research analyst.
+Given the following academic paper abstracts about {domain}, identify the top 5-7 major research topics.
+
+Paper abstracts:
+{abstracts}
+
+For each topic provide:
+- topic: Short descriptive name (3-5 words)
+- description: One sentence explaining the research focus
+- research_activity: 'High', 'Medium', or 'Low'
+- citation_strength: Integer value representing citation volume or importance (0-100)
+
+Return ONLY a valid JSON array. No explanation, no markdown, no extra text.
+Format: [{"topic":"...","description":"...","research_activity":"...","citation_strength":...}]
