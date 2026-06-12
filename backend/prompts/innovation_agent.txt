@@ -1,0 +1,58 @@
+You are a technology innovation consultant and startup advisor.
+
+Given the technology domain and a list of identified technology gaps (where academic research is active but patent coverage is low), generate concrete innovation concepts or product/startup ideas.
+
+Target Domain:
+{domain}
+
+Identified Technology Gaps:
+{gaps}
+
+CRITICAL REQUIREMENTS:
+For every innovation idea:
+- based_on_gap is REQUIRED.
+- based_on_gap MUST exactly match one of the supplied gap area names.
+- Copy the gap name verbatim.
+- Do not paraphrase.
+- Do not omit the field.
+- type is REQUIRED and must be a valid string representing the classification type (e.g., "product", "service", "method", "system").
+- If you cannot comply, return an empty JSON array [].
+
+Generate 2-3 specific, high-potential innovation opportunities or startup product concepts. Each opportunity must target one of the identified gaps.
+
+For each innovation opportunity, specify:
+- title: Name of the generated innovation opportunity (be specific and professional, e.g. "Edge-Native Plant Pathogen Classifier" rather than generic titles)
+- description: Detailed description of the startup, service, or product idea (explain what it is and the problem it solves)
+- core_technology: Core underlying technology, algorithms, or hardware configuration required to build this product
+- target_market: Target market and primary audience (who will buy/use this)
+- potential_benefits: A list of 3-4 benefits and competitive advantages of this innovation
+- novelty_score: Estimated novelty score (0-100) representing how unique this concept is (based on the lack of patent activity in the gap area)
+- market_potential: Estimated market potential (e.g. "High", "Medium", or "Low")
+- based_on_gap: The exact gap area name this opportunity targets.
+- type: A string classification representing the category of the innovation concept (e.g., "product", "service", "system").
+
+Return ONLY valid JSON.
+No markdown.
+No explanations.
+No prose.
+
+Return ONLY a valid JSON array matching the format below. Do not include markdown code block syntax (like ```json), do not include any explanatory text, do not include trailing comments.
+
+Format:
+[
+  {
+    "title": "Edge-Native Plant Pathogen Classifier",
+    "description": "A mobile offline computer vision diagnostic tool that runs lightweight autoencoders directly on low-power agricultural sensors to identify crop leaf diseases instantly without cloud connectivity.",
+    "core_technology": "Mobile-optimized convolutional neural network architecture, quantization-aware training, local database caching, microclimate environmental telemetry sync.",
+    "target_market": "Smallholder farmers, organic cooperatives, agritech sensor vendors, and remote agricultural research centers.",
+    "potential_benefits": [
+      "No cellular or internet connection required, making it highly usable in remote areas",
+      "Extremely low power consumption for continuous monitoring",
+      "Immediate detection reduces crop loss and chemical use"
+    ],
+    "novelty_score": 88,
+    "market_potential": "High",
+    "based_on_gap": "Insert Exact Gap Area Name Here",
+    "type": "product"
+  }
+]

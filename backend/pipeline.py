@@ -13,6 +13,13 @@ class PatentCluster(BaseModel):
     saturation: str = Field(..., description="Patent density/saturation level (High, Medium, Low)")
     major_assignees: List[str] = Field(default_factory=list, description="Top companies or institutions holding patents in this area")
 
+class InnovationIdea(BaseModel):
+    name: str
+    description: str
+    target_user: str
+    type: str
+    based_on_gap: str
+
 class AgentState(TypedDict):
     domain: str
     research_topics: List[dict]
