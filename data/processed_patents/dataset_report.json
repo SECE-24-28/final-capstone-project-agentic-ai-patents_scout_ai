@@ -1,0 +1,23 @@
+{
+  "total_raw_records": 29,
+  "total_clean_records": 24,
+  "duplicates_removed": 1,
+  "missing_titles_removed": 1,
+  "missing_abstracts_removed": 1,
+  "malformed_records_removed": 2,
+  "patents_per_domain": {
+    "Agriculture": 2,
+    "Artificial Intelligence": 2,
+    "Biotechnology": 2,
+    "Cybersecurity": 2,
+    "Education Technology": 2,
+    "FinTech": 2,
+    "Healthcare": 2,
+    "Internet of Things (IoT)": 2,
+    "Renewable Energy": 2,
+    "Robotics": 2,
+    "Smart Cities": 2,
+    "Sustainability": 2
+  },
+  "final_dataset_size": 24
+}

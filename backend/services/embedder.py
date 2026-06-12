@@ -183,7 +183,7 @@ def embed_and_store(collection_name: str, items_list: List[Union[Any, Dict[str, 
         try:
             # Add to ChromaDB
             collection = chroma_client.get_or_create_collection(name=collection_name)
-            collection.add(
+            collection.upsert(
                 ids=ids,
                 documents=documents,
                 metadatas=metadatas,

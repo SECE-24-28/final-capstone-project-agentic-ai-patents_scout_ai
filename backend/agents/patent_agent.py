@@ -11,11 +11,8 @@ from backend.pipeline import (
 from backend.services.patent_fetcher import (
     fetch_patents
 )
-from backend.rag.embedder import (
-    store_documents
-)
-from backend.rag.retriever import (
-    retrieve
+from backend.services.retriever import (
+    retrieve as service_retrieve
 )
 from backend.services.llm_client import (
     generate_response
@@ -32,72 +29,55 @@ if not logger.handlers:
 
 def patent_agent(state: AgentState) -> AgentState:
     """
-    Patent Agent Node:
-    Retrieves patents related to a technology domain from Google Patents,
-    indexes them into ChromaDB, retrieves the most relevant ones, analyzes them,
-    identifies major patent categories, estimates patent saturation levels, and
-    stores the structured results in AgentState.
-
-    Args:
-        state (AgentState): The current state of the agent execution.
-
-    Returns:
-        AgentState: The updated state containing patent clusters or error information.
+    Patent Agent Node (Production):
+    1. Reads domain from state["domain"].
+    2. Fetches patents from the local knowledge base.
+    3. Retrieves top 15 relevant patents from local ChromaDB.
+    4. Formulates a prompt using patent_agent.txt.
+    5. Invokes Gemini to classify and cluster patents.
+    6. Validates clusters against PatentCluster schema.
+    7. Stores clusters in state["patent_clusters"].
     """
     logger.info("Executing Patent Agent...")
     
-    # Initialize patent_clusters in state if not already present
     if "patent_clusters" not in state:
         state["patent_clusters"] = []
 
     try:
-        # 1. Read domain from state["domain"]
+        # 1. Read domain
         domain = state["domain"]
         if not domain or not isinstance(domain, str):
             raise ValueError("Domain must be a non-empty string in AgentState.")
         
         logger.info(f"Target domain: {domain}")
 
-        # 2. Fetch patents using fetch_patents(state["domain"], limit=60)
-        logger.info(f"Fetching patents for domain: {domain}")
-        patents = fetch_patents(state["domain"], limit=60)
-        logger.info(f"Fetched {len(patents)} patents.")
+        # 2. Fetch patents from local database (acts as validation/check)
+        logger.info(f"Fetching local patents for domain: {domain}")
+        patents = fetch_patents(domain, limit=60)
+        logger.info(f"Fetched {len(patents)} local patents.")
 
-        # 3. Store all patents in ChromaDB using store_documents
-        logger.info(f"Storing {len(patents)} patents in ChromaDB...")
-        store_documents(
-            documents=patents,
-            domain=state["domain"],
-            collection_type="patent"
-        )
-        logger.info(f"Stored {len(patents)} patents.")
-
-        # 4. Retrieve the most relevant patents using retrieve (top_k=15)
-        logger.info("Retrieving top 15 relevant patents...")
-        retrieved_docs = retrieve(
-            query=state["domain"],
-            domain=state["domain"],
-            collection_type="patent",
+        # 3. Retrieve the top 15 most relevant patents from the patent_global collection
+        logger.info("Retrieving top 15 relevant patents from 'patent_global'...")
+        retrieved_docs = service_retrieve(
+            query=domain,
+            collection_name="patent_global",
             top_k=15
         )
-        logger.info(f"Retrieved {len(retrieved_docs)} patents.")
+        logger.info(f"Retrieved {len(retrieved_docs)} relevant patents.")
 
-        # 5. Format retrieved patents into a readable context string
+        # 4. Format retrieved patents into a context string
         context_items = []
         for i, doc in enumerate(retrieved_docs):
             meta = doc.get("metadata", {})
             title = meta.get("title", "Unknown Title")
             year = meta.get("year") or "N/A"
-            patent_id = doc.get("id", "Unknown ID")
-            abstract = doc.get("document", "").replace(f"Title: {title}\nAbstract: ", "")
+            assignee = meta.get("assignee", "Unknown Assignee")
             
-            # Map assignee from patent list matching patent_id if possible
-            assignee = "Unknown Assignee"
-            for p in patents:
-                if p.patent_id == patent_id:
-                    if p.inventors:
-                        assignee = ", ".join(p.inventors)
-                    break
+            doc_str = doc.get("document", "")
+            if "Abstract: " in doc_str:
+                abstract = doc_str.split("Abstract: ", 1)[1].strip()
+            else:
+                abstract = doc_str.strip()
 
             item_text = (
                 f"Patent #{i+1}\n"
@@ -110,7 +90,7 @@ def patent_agent(state: AgentState) -> AgentState:
 
         patent_context = "\n\n".join(context_items)
 
-        # 6. Load prompt template using pathlib.Path
+        # 5. Load prompt template
         prompt_path = Path("backend/prompts/patent_agent.txt")
         if not prompt_path.exists():
             prompt_path = Path(__file__).resolve().parent.parent / "prompts" / "patent_agent.txt"
@@ -118,14 +98,14 @@ def patent_agent(state: AgentState) -> AgentState:
         logger.info(f"Loading prompt template from: {prompt_path}")
         prompt_template = prompt_path.read_text(encoding="utf-8")
 
-        # 7. Build final prompt by injecting domain and patents
+        # 6. Build final prompt
         prompt = prompt_template.replace("{domain}", domain).replace("{patents}", patent_context)
 
-        # 8. Generate response using generate_response
+        # 7. Generate response from Gemini
         logger.info("Generating response from LLM client...")
         response = generate_response(prompt)
 
-        # 9. Clean and parse JSON safely
+        # 8. Clean and parse JSON safely
         logger.info("Parsing JSON response...")
         clean_json_str = response.strip()
         
@@ -138,7 +118,6 @@ def patent_agent(state: AgentState) -> AgentState:
             clean_json_str = clean_json_str[:-3]
         clean_json_str = clean_json_str.strip()
 
-        # Robust extraction: find first '[' and last ']'
         start_idx = clean_json_str.find("[")
         end_idx = clean_json_str.rfind("]")
         if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
@@ -150,22 +129,21 @@ def patent_agent(state: AgentState) -> AgentState:
             try:
                 raw_clusters = json.loads(clean_json_str)
             except json.JSONDecodeError as json_err:
-                logger.error(f"Failed to parse JSON response. Raw string: {clean_json_str}. Error: {json_err}")
+                logger.error(f"Failed to parse JSON response: {json_err}")
                 raw_clusters = []
 
         if not isinstance(raw_clusters, list):
-            logger.warning(f"Expected list of clusters, but received: {type(raw_clusters)}")
+            logger.warning(f"Expected list of clusters, but got: {type(raw_clusters)}")
             raw_clusters = []
 
-        # 10. Validate every item using PatentCluster and continue on malformed items
+        # 9. Validate entries using PatentCluster Pydantic schema
         validated_clusters: List[Dict[str, Any]] = []
         for item in raw_clusters:
             try:
-                # Validate item with PatentCluster Pydantic model
                 cluster = PatentCluster(**item)
                 validated_clusters.append(cluster.model_dump())
             except Exception as val_err:
-                logger.warning(f"Skipping malformed patent cluster entry due to validation error: {val_err}. Entry: {item}")
+                logger.warning(f"Skipping malformed patent cluster entry: {val_err}. Entry: {item}")
 
         logger.info(f"Validated {len(validated_clusters)} patent clusters.")
 

@@ -42,7 +42,7 @@ def get_fallback_json(prompt: str) -> str:
     prompt_lower = prompt.lower()
     
     # 1. Check if the prompt is for the Research Agent
-    if "research topics" in prompt_lower or "research_topics" in prompt_lower or "abstracts" in prompt_lower:
+    if ("research topics" in prompt_lower or "research_topics" in prompt_lower or "abstracts" in prompt_lower) and "patent" not in prompt_lower:
         # Check domain context
         if "healthcare" in prompt_lower or "medical" in prompt_lower or "diagnostic" in prompt_lower:
             mock_topics = [

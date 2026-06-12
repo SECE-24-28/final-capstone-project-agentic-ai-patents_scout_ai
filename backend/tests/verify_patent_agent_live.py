@@ -36,34 +36,32 @@ def run_live_verification():
     print(f"\n[SUCCESS] Patent Agent Live Run Succeeded! Identified {len(clusters)} patent clusters:")
     print(json.dumps(clusters, indent=2))
     
-    # 4. Validate document ingestion source distribution inside the vector store
-    print("\nValidating patent document ingestion in vector store...")
     from backend.services.embedder import CHROMA_AVAILABLE, chroma_client, pure_db
-    collection_name = f"patents_{domain.lower().replace(' ', '_')}"
+    collection_name = "patent_global"
     
     total_found = 0
-    sources = {}
+    domains = {}
     if CHROMA_AVAILABLE and chroma_client is not None:
         try:
             col = chroma_client.get_collection(name=collection_name)
             res = col.get()
             total_found = len(res.get("ids", []))
             for meta in res.get("metadatas", []):
-                src = meta.get("source", "Unknown")
-                sources[src] = sources.get(src, 0) + 1
+                dom = meta.get("domain", "Unknown")
+                domains[dom] = domains.get(dom, 0) + 1
         except Exception as e:
             print(f"Error querying ChromaDB collection: {e}")
     elif pure_db is not None:
         items = pure_db.data.get(collection_name, [])
         total_found = len(items)
         for item in items:
-            src = item.get("metadata", {}).get("source", "Unknown")
-            sources[src] = sources.get(src, 0) + 1
+            dom = item.get("metadata", {}).get("domain", "Unknown")
+            domains[dom] = domains.get(dom, 0) + 1
             
-    print(f"[Verification] Ingested patent source distribution in vector store (Total: {total_found}):")
-    if sources:
-        for src, count in sources.items():
-            print(f"  - {src}: {count} patents")
+    print(f"[Verification] Ingested patent domain distribution in vector store '{collection_name}' (Total: {total_found}):")
+    if domains:
+        for dom, count in domains.items():
+            print(f"  - {dom}: {count} patents")
     else:
         print("  No patents found in vector collection.")
         
