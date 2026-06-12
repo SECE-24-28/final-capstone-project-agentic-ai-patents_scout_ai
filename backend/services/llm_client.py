@@ -41,10 +41,27 @@ def get_fallback_json(prompt: str) -> str:
     """
     prompt_lower = prompt.lower()
     
+    # Extract domain query from the prompt for context-specific matching
+    domain_query = ""
+    if "about " in prompt_lower:
+        try:
+            part = prompt_lower.split("about ", 1)[1]
+            domain_query = part.split(",", 1)[0].strip()
+        except Exception:
+            pass
+    elif "domain: " in prompt_lower:
+        try:
+            part = prompt_lower.split("domain: ", 1)[1]
+            domain_query = part.split("\n", 1)[0].strip()
+        except Exception:
+            pass
+            
+    match_target = domain_query if domain_query else prompt_lower
+    
     # 1. Check if the prompt is for the Research Agent
     if ("research topics" in prompt_lower or "research_topics" in prompt_lower or "abstracts" in prompt_lower) and "patent" not in prompt_lower:
         # Check domain context
-        if "healthcare" in prompt_lower or "medical" in prompt_lower or "diagnostic" in prompt_lower:
+        if "healthcare" in match_target or "medical" in match_target or "diagnostic" in match_target:
             mock_topics = [
                 {
                     "topic": "AI-Assisted Diagnostics",
@@ -71,7 +88,7 @@ def get_fallback_json(prompt: str) -> str:
                     "citation_strength": 35
                 }
             ]
-        elif "vehicle" in prompt_lower or "battery" in prompt_lower or "charging" in prompt_lower:
+        elif "vehicle" in match_target or "battery" in match_target or "charging" in match_target:
             mock_topics = [
                 {
                     "topic": "Battery Health Prediction",
@@ -92,7 +109,7 @@ def get_fallback_json(prompt: str) -> str:
                     "citation_strength": 68
                 }
             ]
-        elif any(kw in prompt_lower for kw in ["cybersecurity", "security", "cryptography", "firewall", "malware", "network"]):
+        elif any(kw in match_target for kw in ["cybersecurity", "security", "cryptography", "firewall", "malware", "network"]):
             mock_topics = [
                 {
                     "topic": "Zero Trust Network Access",
@@ -119,7 +136,7 @@ def get_fallback_json(prompt: str) -> str:
                     "citation_strength": 72
                 }
             ]
-        elif any(kw in prompt_lower for kw in ["ai", "machine learning", "deep learning", "neural", "intelligence", "language model"]):
+        elif any(kw in match_target for kw in ["ai", "machine learning", "deep learning", "neural", "intelligence", "language model"]):
             mock_topics = [
                 {
                     "topic": "Large Language Model Reasoning",
@@ -144,6 +161,27 @@ def get_fallback_json(prompt: str) -> str:
                     "description": "Visualizing activation pathways and feature attribution methods inside deep neural nets.",
                     "research_activity": "Medium",
                     "citation_strength": 70
+                }
+            ]
+        elif "city" in match_target or "cities" in match_target or "urban" in match_target:
+            mock_topics = [
+                {
+                    "topic": "Urban IoT Infrastructure",
+                    "description": "Architectures and communication protocols for deploying high-density sensor networks across municipal areas.",
+                    "research_activity": "High",
+                    "citation_strength": 92
+                },
+                {
+                    "topic": "Dynamic Traffic Routing",
+                    "description": "Reinforcement learning algorithms for adaptive traffic signal control and emergency vehicle routing.",
+                    "research_activity": "High",
+                    "citation_strength": 88
+                },
+                {
+                    "topic": "Data Privacy in Smart Spaces",
+                    "description": "Privacy-preserving frameworks for handling crowdsourced municipal and citizen telemetry data.",
+                    "research_activity": "Medium",
+                    "citation_strength": 75
                 }
             ]
         else:
@@ -177,7 +215,7 @@ def get_fallback_json(prompt: str) -> str:
         return json.dumps(mock_topics)
     elif "patent clusters" in prompt_lower or "patent_clusters" in prompt_lower or "patent_saturation" in prompt_lower or "patent count" in prompt_lower or "saturation" in prompt_lower:
         # Check domain context
-        if "healthcare" in prompt_lower or "medical" in prompt_lower or "diagnostic" in prompt_lower:
+        if "healthcare" in match_target or "medical" in match_target or "diagnostic" in match_target:
             mock_clusters = [
                 {
                     "category": "Wearable Vital Sensors",
@@ -198,7 +236,7 @@ def get_fallback_json(prompt: str) -> str:
                     "major_assignees": ["Teladoc", "Amwell", "Epic Systems"]
                 }
             ]
-        elif "vehicle" in prompt_lower or "battery" in prompt_lower or "charging" in prompt_lower:
+        elif "vehicle" in match_target or "battery" in match_target or "charging" in match_target:
             mock_clusters = [
                 {
                     "category": "Battery Cell Configuration",
@@ -219,7 +257,7 @@ def get_fallback_json(prompt: str) -> str:
                     "major_assignees": ["ChargePoint", "ABB", "Siemens"]
                 }
             ]
-        elif any(kw in prompt_lower for kw in ["cybersecurity", "security", "cryptography", "firewall", "malware", "network"]):
+        elif any(kw in match_target for kw in ["cybersecurity", "security", "cryptography", "firewall", "malware", "network"]):
             mock_clusters = [
                 {
                     "category": "Network Security Gateways",
@@ -240,7 +278,7 @@ def get_fallback_json(prompt: str) -> str:
                     "major_assignees": ["CrowdStrike", "FireEye", "Splunk"]
                 }
             ]
-        elif any(kw in prompt_lower for kw in ["ai", "machine learning", "deep learning", "neural", "intelligence", "language model"]):
+        elif any(kw in match_target for kw in ["ai", "machine learning", "deep learning", "neural", "intelligence", "language model"]):
             mock_clusters = [
                 {
                     "category": "Neural Net Optimization Hardware",
@@ -259,6 +297,27 @@ def get_fallback_json(prompt: str) -> str:
                     "description": "Generative code creation pipelines utilizing compiler validation to resolve syntax bugs.",
                     "saturation": "Medium",
                     "major_assignees": ["GitHub", "Microsoft", "OpenAI"]
+                }
+            ]
+        elif "city" in match_target or "cities" in match_target or "urban" in match_target:
+            mock_clusters = [
+                {
+                    "category": "Intelligent Traffic Management",
+                    "description": "Patented systems for real-time traffic signal optimization and congestion prediction using vehicle telematics.",
+                    "saturation": "High",
+                    "major_assignees": ["Siemens", "IBM", "Cisco Systems"]
+                },
+                {
+                    "category": "Smart Grid Power Distribution",
+                    "description": "Patents covering automated load balancing and renewable energy integration in municipal grids.",
+                    "saturation": "High",
+                    "major_assignees": ["General Electric", "Schneider Electric", "ABB"]
+                },
+                {
+                    "category": "Environmental Sensor Networks",
+                    "description": "Distributed sensor mesh networks for monitoring air quality, noise, and climate indicators in urban spaces.",
+                    "saturation": "Medium",
+                    "major_assignees": ["Honeywell", "Intel", "Bosch"]
                 }
             ]
         else:
