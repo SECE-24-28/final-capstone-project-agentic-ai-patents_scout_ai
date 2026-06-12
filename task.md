@@ -40,7 +40,10 @@
 - [x] Define shared state in `backend/pipeline.py`
 - [x] Build Agent 01: Research Agent (`backend/agents/research_agent.py`)
 - [x] Build Agent 02: Patent Agent (`backend/agents/patent_agent.py`)
-- [ ] Build Agent 03: Gap Analysis Agent (`backend/agents/gap_agent.py`)
+- [/] Build Agent 03: Gap Analysis Agent (`backend/agents/gap_analysis_agent.py`)
+  - [ ] Create prompt template `backend/prompts/gap_analysis_agent.txt`
+  - [ ] Implement core agent in `backend/agents/gap_analysis_agent.py`
+  - [ ] Build unit and integration tests in `backend/tests/test_gap_analysis_agent.py`
 - [ ] Build Agent 04: Innovation Agent (`backend/agents/innovation_agent.py`)
 - [ ] Build Agent 05: Patentability Agent (`backend/agents/patentability_agent.py`)
 - [ ] Build Agent 06: Report Generation Agent (`backend/agents/report_gen_agent.py`)
