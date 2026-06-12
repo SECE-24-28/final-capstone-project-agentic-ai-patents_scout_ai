@@ -1,302 +1,131 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/s7J27iqd)
 
-# PatentScout Lite 🚀
+# PatentScout AI 🚀
+### Agentic AI Innovation Discovery & Patent Analysis System
 
-### AI-Powered Research Gap & Innovation Discovery System
-
-PatentScout Lite is a multi-agent AI platform that discovers innovation opportunities by analyzing both research publications and patent landscapes. The system identifies gaps between academic research and existing patents, helping users uncover patentable ideas, emerging technologies, and startup opportunities.
-
----
-
-## Problem Statement
-
-Researchers and innovators often focus only on academic papers while overlooking existing patents and commercial innovations. This can lead to:
-
-- Reinventing already patented solutions
-- Missing potential innovation opportunities
-- Difficulty identifying patentable concepts
-- Lack of visibility into commercialization potential
-
-PatentScout Lite bridges this gap by combining research intelligence and patent intelligence to generate actionable innovation insights.
+PatentScout AI is a multi-agent platform designed to discover innovation gaps by analyzing the academic research landscape alongside commercial patent databases. Running on **LangGraph** and powered by **Google Gemini 2.5 Flash**, the system retrieves data from multiple academic sources and queries a localized corpus of 10,791 patents to isolate commercialization opportunities.
 
 ---
 
-## Features
+## Technical Architecture
 
-### Research Analysis
-- Analyze research papers from academic sources
-- Identify trending research domains
-- Extract emerging technologies and concepts
+PatentScout AI utilizes a collaborative multi-agent design sharing a central `AgentState` context:
 
-### Patent Analysis
-- Analyze patent datasets and patent abstracts
-- Discover active innovation areas
-- Identify existing patented technologies
+### 1. Research Agent (`backend/agents/research_agent.py`)
+- **Sources**: Academic journals and articles from **arXiv**, **Semantic Scholar**, and **OpenAlex**.
+- **Capabilities**: Reconstructs compressed OpenAlex inverted index abstracts, performs title-based deduplication, and groups academic literature into technology topics.
+- **Verification**: `python -m backend.tests.verify_research_agent_live`
 
-### Gap Analysis
-- Compare research trends with patent trends
-- Detect underexplored innovation opportunities
-- Highlight areas with high research activity and low patent coverage
+### 2. Patent Agent (`backend/agents/patent_agent.py`)
+- **Source**: A verified, production-scale database of **10,791 unique patents** stored locally.
+- **Capabilities**: Performs vector RAG searches using local embeddings, queries matching patents, clusters technical claims, and extracts saturated technology domains.
+- **Verification**: `python -m backend.tests.verify_patent_agent_live`
 
-### Innovation Discovery
-- Generate patentable ideas
-- Suggest product innovations
-- Recommend startup opportunities
-
-### Patentability Assessment
-- Estimate patentability score
-- Evaluate novelty and uniqueness
-- Assess commercialization potential
-
-### Automated Reporting
-- Generate comprehensive innovation reports
-- Provide research insights and recommendations
-- Present findings through an interactive dashboard
+### 3. Gap Analysis Agent (`backend/agents/gap_agent.py`) *(In Development)*
+- **Capabilities**: Cross-references academic topics with patent clusters to isolate technology gaps (high research activity but low patent saturation).
 
 ---
 
-## Multi-Agent Architecture
+## Technology Stack
 
-### Research Agent
-**Responsibilities**
-- Retrieve research papers
-- Analyze academic trends
-- Identify popular research topics
-
-**Output**
-- Top research areas
-- Emerging technologies
-- Research summaries
-
----
-
-### Patent Agent
-**Responsibilities**
-- Retrieve patent information
-- Analyze patent trends
-- Extract innovation patterns
-
-**Output**
-- Top patent domains
-- Patent activity insights
-- Technology classifications
-
----
-
-### Gap Analysis Agent
-**Responsibilities**
-- Compare research and patent landscapes
-- Detect innovation gaps
-- Identify untapped opportunities
-
-**Output**
-- Gap analysis report
-- Innovation opportunities
-- Opportunity matrix
-
----
-
-### Innovation Agent
-**Responsibilities**
-- Generate novel concepts
-- Propose patentable ideas
-- Create startup recommendations
-
-**Output**
-- Patent opportunities
-- Product concepts
-- Startup ideas
-
----
-
-### Report Agent
-**Responsibilities**
-- Aggregate outputs from all agents
-- Generate final reports
-- Visualize innovation insights
-
-**Output**
-- Innovation report
-- Patentability score
-- Executive summary
-
----
-
-## Example Workflow
-
-### Input
-```
-Smart Agriculture
-```
-
-### System Workflow
-```
-Research Agent
-        ↓
-Patent Agent
-        ↓
-Gap Analysis Agent
-        ↓
-Innovation Agent
-        ↓
-Report Agent
-```
-
-### Output
-- Top Research Topics
-- Top Patent Topics
-- Research vs Patent Gap Analysis
-- Innovation Opportunities
-- Patentability Score
-- Suggested Startup Idea
-
----
-
-## Tech Stack
-
-### Frontend
-- Streamlit / React.js
-
-### Backend
-- Python
-- FastAPI
-
-### Agent Framework
-- CrewAI / LangGraph
-
-### AI Models
-- OpenAI GPT Models
-
-### Data Sources
-- arXiv
-- Semantic Scholar
-- Google Patents
-- Patent Datasets
-
-### Vector Database
-- ChromaDB
-- FAISS
-
-### Data Processing
-- Pandas
-- NumPy
+- **Large Language Models**: Google Gemini 2.5 Flash (via `LangChain` Google GenAI SDK).
+- **Core Orchestration**: LangGraph StateGraph pipeline, Pydantic schemas.
+- **Vector Database**: ChromaDB (with pure-Python RAG memory fallbacks).
+- **Embeddings**: SentenceTransformers (`all-MiniLM-L6-v2`).
+- **Data Ingestion**: Pandas, BigQuery validation tools.
+- **Backend**: FastAPI.
+- **Frontend**: React.js + Vite.
 
 ---
 
 ## Project Structure
 
 ```bash
-PatentScout-Lite/
+PatentScout-AI/
 │
-├── frontend/
 ├── backend/
-├── agents/
-│   ├── research_agent.py
-│   ├── patent_agent.py
-│   ├── gap_agent.py
-│   ├── innovation_agent.py
-│   └── report_agent.py
+│   ├── agents/                     # Multi-Agent nodes (Research, Patent, Gap, etc.)
+│   ├── config/                     # Settings and environment variables
+│   ├── data_pipeline/              # Ingestion, validation, and bootstrapping pipelines
+│   ├── models/                     # Shared Pydantic data schemas and TypedDict states
+│   ├── prompts/                    # System prompts templates for LLM instruction
+│   ├── services/                   # Fetchers, Embedder, Retriever, and LLM clients
+│   └── tests/                      # Automated unit, integration, and live verify scripts
 │
 ├── data/
-├── reports/
-├── vector_store/
+│   ├── raw_patents/                # BigQuery 11,650-patent export CSV
+│   └── processed_patents/          # Balanced and validated output datasets
+│
 ├── requirements.txt
-├── app.py
 └── README.md
 ```
 
 ---
 
-## Installation
+## Installation & Setup
 
-### Clone Repository
-
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/PatentScout-Lite.git
-cd PatentScout-Lite
+git clone https://github.com/SECE-24-28/final-capstone-project-agentic-ai-patents_scout_ai.git
+cd final-capstone-project-agentic-ai-patents_scout_ai
 ```
 
-### Create Virtual Environment
-
-```bash
-python -m venv venv
-```
-
-### Activate Environment
-
-#### Windows
-```bash
-venv\Scripts\activate
-```
-
-#### Linux / Mac
-```bash
-source venv/bin/activate
-```
-
-### Install Dependencies
-
-```bash
+### 2. Setup Virtual Environment (Windows)
+```powershell
+python -m venv .venv
+.venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### Configure Environment Variables
-
-Create a `.env` file:
-
+### 3. Configuration
+Create a `.env` file in the root directory:
 ```env
-OPENAI_API_KEY=your_api_key
-```
-
-### Run Application
-
-```bash
-streamlit run app.py
-```
-
-or
-
-```bash
-uvicorn main:app --reload
+GOOGLE_API_KEY=your_gemini_api_key
+OPENALEX_API_EMAIL=your_email@domain.com
 ```
 
 ---
 
-## Future Enhancements
+## Data Ingestion Pipeline
 
-- Real-time patent monitoring
-- Patent similarity search
-- Automated patent drafting assistance
-- Market size estimation
-- Competitor analysis
-- Investor readiness scoring
-- Industry-specific innovation reports
-- Multi-language support
+To populate your local persistent vector database with the full 11,650 Google Patents dataset:
 
----
-
-## Use Cases
-
-- Research & Development
-- Startup Ideation
-- Patent Discovery
-- Technology Scouting
-- Innovation Management
-- Entrepreneurship Programs
-- Product Development
+1. **Validate Raw Data**:
+   ```powershell
+   .venv\Scripts\python.exe -m backend.tests.validate_patent_csv
+   ```
+2. **Ingest & Embed Patents**:
+   ```powershell
+   .venv\Scripts\python.exe -m backend.data_pipeline.patent_ingestion
+   ```
+   *Note: Uses `.upsert()` to prevent duplication errors on re-runs.*
 
 ---
 
-## Project Goal
+## Execution & Verification
 
-PatentScout Lite aims to help researchers, entrepreneurs, and innovators discover hidden opportunities by combining research intelligence and patent intelligence. The platform enables users to move from research insights to potentially patentable and commercially viable innovations.
+To run manual verification and live RAG analyses across both agents:
+
+### 1. Verify Research Agent
+Runs a live academic search and groups findings by publisher source:
+```powershell
+.venv\Scripts\python.exe -m backend.tests.verify_research_agent_live
+```
+
+### 2. Verify Patent Agent
+Queries the local vector store for the target domain and clusters patent classes:
+```powershell
+.venv\Scripts\python.exe -m backend.tests.verify_patent_agent_live
+```
+
+### 3. Run Automated Integration Test Suite
+```powershell
+.venv\Scripts\python.exe -m unittest backend/tests/test_patent_agent_live.py
+```
 
 ---
 
 ## Authors
-
-**Sudharshan S**  
-**Sivaganesh B**  
-**Prennithe S G**  
-
-Built as an Agentic AI project focused on innovation discovery, patent intelligence, and startup opportunity generation.
+- **Sudharshan S**
+- **Sivaganesh B**
+- **Prennithe S G**
