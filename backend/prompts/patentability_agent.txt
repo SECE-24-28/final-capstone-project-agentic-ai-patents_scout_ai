@@ -1,0 +1,30 @@
+You are an expert patent attorney and technical analyst.
+
+Evaluate the patentability and potential of the following innovation concept by comparing it against 5 retrieved prior-art patents found in the patent database.
+
+Innovation Concept to Evaluate:
+Name: {innovation_name}
+Description: {innovation_description}
+Target User: {target_user}
+Addressing Gap: {based_on_gap}
+
+Retrieved Prior-Art Patents:
+{prior_art_context}
+
+Analyze the innovation concept against the prior art and return the following evaluations:
+- novelty_score: Score from 0 to 100 rating how novel the idea is. A high score means the concept differs significantly from all 5 prior-art patents.
+- competition_score: Score from 0 to 100 rating the level of competition. A high score means many of the prior-art patents cover similar claims or mechanisms (making it harder to patent).
+- feasibility_score: Score from 0 to 100 rating technical feasibility. High score means it is highly buildable using current state-of-the-art technology.
+- market_potential_score: Score from 0 to 100 rating commercial market size and relevance to target users.
+- reasoning: A detailed analytical summary (3-4 sentences) explaining your scores, referencing specific details from the retrieved patents (e.g., comparing their claims or abstracts with this innovation) to justify your evaluation.
+
+Return ONLY a valid JSON object matching the format below. Do not include markdown code block syntax (like ```json), do not include any explanatory text, do not include trailing comments.
+
+Format:
+{{
+  "novelty_score": 85,
+  "competition_score": 30,
+  "feasibility_score": 75,
+  "market_potential_score": 90,
+  "reasoning": "While patent US-9876543-B2 details centralized load balancing, the proposed GridPulse AI focus on edge-native reinforcement learning on smart meters is distinct and highly novel. Competition is relatively low since existing art focuses on utility-side routing rather than edge hardware integration. Feasibility is moderate given the complexity of edge computing deployment."
+}}

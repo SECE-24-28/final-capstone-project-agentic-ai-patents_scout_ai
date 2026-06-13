@@ -1,29 +1,27 @@
 import os
-from langchain_google_genai import ChatGoogleGenerativeAI
-from backend.config import settings
+import requests
+from dotenv import load_dotenv
 
-def test_models():
-    api_key = settings.GOOGLE_API_KEY
-    if not api_key:
-        print("Error: No API key found.")
-        return
-        
-    models = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.5-flash"]
-    for model_name in models:
-        print(f"Testing model: {model_name}...")
-        try:
-            llm = ChatGoogleGenerativeAI(
-                model=model_name,
-                google_api_key=api_key,
-                temperature=0.1
-            )
-            response = llm.invoke("Say hello.")
-            print(f"  [SUCCESS] {model_name} responded: {response.content.strip()}")
-            return model_name
-        except Exception as e:
-            print(f"  [FAILED] {model_name}: {e}")
-            
-    return None
+load_dotenv()
 
-if __name__ == "__main__":
-    test_models()
+api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
+print(f"API Key starting with: {api_key[:10] if api_key else 'None'}")
+
+if api_key:
+    url = f"https://generativelanguage.googleapis.com/v1beta/models?key={api_key}"
+    try:
+        response = requests.get(url)
+        print(f"Status Code: {response.status_code}")
+        if response.status_code == 200:
+            models_data = response.json()
+            print("Available models:")
+            for m in models_data.get("models", []):
+                print(f" - {m.get('name')} (DisplayName: {m.get('displayName')})")
+                print(f"   Supported methods: {m.get('supportedGenerationMethods')}")
+        else:
+            print("Error response:")
+            print(response.text)
+    except Exception as e:
+        print(f"Error querying API: {e}")
+else:
+    print("No API key found in env.")

@@ -8,7 +8,7 @@ def generate_response(prompt: str) -> str:
     Call Gemini 2.5 Flash model with the given prompt.
     Returns the raw string output.
     """
-    print("[LLM Client] Sending request to Gemini 2.5 Flash...")
+    print("[LLM Client] Sending request to Gemini 1.5 Flash...")
     
     # Check if key is available
     api_key = settings.GOOGLE_API_KEY
@@ -343,5 +343,15 @@ def get_fallback_json(prompt: str) -> str:
                 }
             ]
         return json.dumps(mock_clusters)
+        
+    elif "novelty_score" in prompt_lower or "competition_score" in prompt_lower or "patentability" in prompt_lower:
+        mock_eval = {
+            "novelty_score": 80,
+            "competition_score": 30,
+            "feasibility_score": 75,
+            "market_potential_score": 85,
+            "reasoning": "Prior-art search indicates moderate to high novelty. The core claims around custom integration pathways appear distinct from existing utility patents, though standard interface modules present minor competition."
+        }
+        return json.dumps(mock_eval)
         
     return "[]"
