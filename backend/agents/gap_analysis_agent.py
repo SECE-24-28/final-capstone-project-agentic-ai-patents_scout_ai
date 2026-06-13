@@ -115,6 +115,23 @@ def get_local_fallback_gaps(domain: str) -> List[Dict[str, Any]]:
                 "rationale": "Extensive active research on dynamic reinforcement learning algorithms optimizing municipal power routers, while commercial patents focus on passive load switching."
             }
         ]
+    elif "vehicle" in domain_lower or "battery" in domain_lower or "charging" in domain_lower or "electric" in domain_lower:
+        return [
+            {
+                "area": "AI Battery Health Prediction",
+                "research_activity": "High",
+                "patent_activity": "Low",
+                "opportunity_score": 91,
+                "rationale": "Substantial academic literature on physics-informed models predicting lithium-ion capacity fade and dendrite formation, but commercial patent filings remain sparse compared to the volume of research output."
+            },
+            {
+                "area": "Decentralized Vehicle-to-Grid Coordination",
+                "research_activity": "High",
+                "patent_activity": "None",
+                "opportunity_score": 87,
+                "rationale": "Growing body of research on edge-based V2G energy scheduling for residential microgrids, but no meaningful patent activity found in offline mesh coordination protocols for EV fleets."
+            }
+        ]
     else:
         # Default to Smart Agriculture
         return [

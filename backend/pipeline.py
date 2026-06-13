@@ -13,23 +13,6 @@ class PatentCluster(BaseModel):
     saturation: str = Field(..., description="Patent density/saturation level (High, Medium, Low)")
     major_assignees: List[str] = Field(default_factory=list, description="Top companies or institutions holding patents in this area")
 
-class InnovationIdea(BaseModel):
-    name: str = Field(..., description="Short descriptive name of the product/startup idea")
-    description: str = Field(..., description="Detailed description of the startup or product idea")
-    target_user: str = Field(..., description="Target market and primary audience")
-    type: str = Field(..., description="Type of innovation, e.g. product, startup, research")
-    based_on_gap: str = Field(..., description="The technological gap this idea addresses")
-
-class PatentabilityScore(BaseModel):
-    innovation_name: str = Field(..., description="Title of the evaluated innovation opportunity")
-    novelty_score: int = Field(..., description="Estimated novelty score (0-100)")
-    competition_score: int = Field(..., description="Estimated competition score (0-100, lower is better)")
-    feasibility_score: int = Field(..., description="Estimated feasibility score (0-100)")
-    market_potential_score: int = Field(..., description="Estimated market potential score (0-100)")
-    overall_score: int = Field(..., description="Calculated overall patentability score (0-100)")
-    reasoning: str = Field(..., description="Detailed reasoning explaining the score calculations based on prior art")
-    similar_patents: List[str] = Field(default_factory=list, description="Relevant prior-art patents found during search")
-
 class AgentState(TypedDict):
     domain: str
     research_topics: List[dict]

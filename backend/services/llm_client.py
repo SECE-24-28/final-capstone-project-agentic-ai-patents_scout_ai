@@ -43,7 +43,13 @@ def get_fallback_json(prompt: str) -> str:
     
     # Extract domain query from the prompt for context-specific matching
     domain_query = ""
-    if "about " in prompt_lower:
+    if "target domain:" in prompt_lower:
+        try:
+            part = prompt_lower.split("target domain:", 1)[1]
+            domain_query = part.split("\n", 1)[0].strip()
+        except Exception:
+            pass
+    elif "about " in prompt_lower:
         try:
             part = prompt_lower.split("about ", 1)[1]
             domain_query = part.split(",", 1)[0].strip()
@@ -57,7 +63,140 @@ def get_fallback_json(prompt: str) -> str:
             pass
             
     match_target = domain_query if domain_query else prompt_lower
-    
+
+    # 0. Check FIRST if the prompt is for the Innovation Agent
+    #    (must be before patent-cluster check since innovation prompt contains 'saturation')
+    if ("innovation concepts" in prompt_lower or "novelty_score" in prompt_lower
+            or "potential_benefits" in prompt_lower
+            or "core_technology" in prompt_lower or "target_market" in prompt_lower):
+        if "vehicle" in match_target or "battery" in match_target or "charging" in match_target:
+            mock_ideas = [
+                {
+                    "title": "AI-Based Battery Health Prognostics Engine",
+                    "description": "An onboard diagnostics platform that leverages physics-informed machine learning to predict lithium-ion battery capacity fade and dendrite formation in real-time, enabling adaptive charging regulation that significantly extends pack lifespan.",
+                    "core_technology": "Physics-informed neural networks (PINNs), electrochemical impedance spectroscopy analysis, and low-power microcontroller edge deployment.",
+                    "target_market": "Electric vehicle manufacturers, battery pack integrators, and commercial fleet operators.",
+                    "potential_benefits": [
+                        "Increases battery pack lifespan by up to 25% through adaptive charging regulation",
+                        "Provides accurate state-of-health diagnostics down to individual cell levels",
+                        "Early detection of thermal runaway hazards before they manifest physically"
+                    ],
+                    "novelty_score": 90,
+                    "market_potential": "High"
+                },
+                {
+                    "title": "Offline Bidirectional Charging Orchestration Platform",
+                    "description": "A vehicle-to-grid (V2G) management system that operates using only local communication to coordinate bidirectional energy flows between EV fleets and residential microgrids without relying on central cloud infrastructure.",
+                    "core_technology": "Edge-deployed reinforcement learning scheduler, IEEE 2030.5 protocol stack, and fault-tolerant peer-to-peer mesh communication.",
+                    "target_market": "Residential microgrid operators, commercial EV fleet managers, and utility companies piloting demand response.",
+                    "potential_benefits": [
+                        "Eliminates latency from cloud-based orchestration, enabling real-time demand response",
+                        "Avoids reliance on central server infrastructure, reducing single points of failure",
+                        "Minimal existing patent coverage in decentralized V2G mesh coordination"
+                    ],
+                    "novelty_score": 85,
+                    "market_potential": "High"
+                }
+            ]
+        elif "cybersecurity" in match_target or "security" in match_target:
+            mock_ideas = [
+                {
+                    "title": "Quantum-Resistant Identity Verification Gateway",
+                    "description": "A post-quantum biometric authentication gateway that performs lattice-based cryptographic verification on local user hardware to prevent identity theft in zero-trust environments without any cloud dependency.",
+                    "core_technology": "Lattice-based cryptography (Kyber/Dilithium), homomorphic signature verification, and secure hardware enclave isolation.",
+                    "target_market": "Financial institutions, critical infrastructure providers, and government security agencies.",
+                    "potential_benefits": [
+                        "Protects identity signatures against future quantum decryption attacks",
+                        "Maintains zero-trust security posture on untrusted edge devices",
+                        "Minimal latency compared to cloud-based post-quantum cryptographic schemes"
+                    ],
+                    "novelty_score": 95,
+                    "market_potential": "High"
+                }
+            ]
+        elif "renewable" in match_target or "solar" in match_target or "energy" in match_target:
+            mock_ideas = [
+                {
+                    "title": "Solid-State Solar Pack Lifetime Optimizer",
+                    "description": "An edge-deployed optimization engine for solid-state solar storage arrays that continuously monitors electrolyte interface integrity and adapts charge-discharge cycles to maximize cycle lifetime beyond current liquid-electrolyte limitations.",
+                    "core_technology": "Electrochemical degradation modeling, solid-state interface simulation, and on-device anomaly detection neural networks.",
+                    "target_market": "Residential solar installers, off-grid energy storage vendors, and utility-scale battery integrators.",
+                    "potential_benefits": [
+                        "Extends solid-state pack lifetime by 30%+ through precision cycle management",
+                        "Enables reliable off-grid power for remote or disaster-resilient infrastructure",
+                        "Very low patent saturation in the solid-state pack optimization area"
+                    ],
+                    "novelty_score": 90,
+                    "market_potential": "High"
+                }
+            ]
+        elif "healthcare" in match_target or "medical" in match_target:
+            mock_ideas = [
+                {
+                    "title": "Federated Genomic Drug Dosage Personalization Engine",
+                    "description": "A privacy-preserving federated learning platform that trains personalized cancer drug dosage models across hospital networks without sharing raw patient genomic data, enabling precision oncology at scale.",
+                    "core_technology": "Federated learning with differential privacy, genomic sequence alignment models, and FHIR-compliant secure data exchange.",
+                    "target_market": "Oncology hospital networks, precision medicine startups, and pharmaceutical research organizations.",
+                    "potential_benefits": [
+                        "Enables precision dosage without exposing sensitive genomic data across institutions",
+                        "Significantly improves drug response outcomes in complex cancer treatments",
+                        "Near-zero patent coverage in federated genomic-based dosage optimization"
+                    ],
+                    "novelty_score": 91,
+                    "market_potential": "High"
+                }
+            ]
+        elif "city" in match_target or "cities" in match_target or "urban" in match_target:
+            mock_ideas = [
+                {
+                    "title": "Decentralized Urban Privacy Telemetry Mesh",
+                    "description": "A city-scale distributed sensor mesh that collects and anonymizes municipal telemetry data using local differential privacy computation, eliminating centralized data collection vulnerabilities.",
+                    "core_technology": "Differential privacy algorithms, local federated aggregation, LoRaWAN IoT mesh protocols, and distributed consensus ledgers.",
+                    "target_market": "Smart city administrations, municipal infrastructure vendors, and civil liberties-focused technology integrators.",
+                    "potential_benefits": [
+                        "Protects citizen privacy by design without relying on data anonymization at a central server",
+                        "Reduces attack surface of city sensor networks by eliminating central aggregation points",
+                        "Near-zero existing patent coverage in decentralized municipal differential privacy"
+                    ],
+                    "novelty_score": 94,
+                    "market_potential": "High"
+                }
+            ]
+        elif any(kw in match_target for kw in ["ai", "machine learning", "intelligence"]):
+            mock_ideas = [
+                {
+                    "title": "Federated Multi-Agent Memory Consensus Platform",
+                    "description": "A privacy-preserving state synchronization infrastructure that enables multiple LLM agents in a distributed organization to share learned memory embeddings without centralizing sensitive reasoning traces.",
+                    "core_technology": "Federated learning, encrypted memory embedding storage, zero-knowledge proof verification of model updates, and multi-party computation.",
+                    "target_market": "Enterprise AI labs, regulated industries deploying multi-agent systems, and government AI programs.",
+                    "potential_benefits": [
+                        "Enables multi-agent collaboration without sharing sensitive reasoning or data traces",
+                        "No existing patent coverage in federated LLM state consensus mechanisms",
+                        "Reduces hallucination rates by sharing grounded memory embeddings across agents"
+                    ],
+                    "novelty_score": 92,
+                    "market_potential": "High"
+                }
+            ]
+        else:
+            # Default smart agriculture
+            mock_ideas = [
+                {
+                    "title": "Edge-Native Plant Pathogen Classifier",
+                    "description": "A mobile offline computer vision diagnostic tool that runs lightweight autoencoders directly on low-power agricultural sensors to identify crop leaf diseases instantly without cloud connectivity.",
+                    "core_technology": "Mobile-optimized convolutional neural network, quantization-aware training, local disease database, microclimate sensor telemetry.",
+                    "target_market": "Smallholder farmers, organic cooperatives, agritech sensor vendors, and remote agricultural research centers.",
+                    "potential_benefits": [
+                        "No cellular or internet connection required — ideal for remote areas",
+                        "Extremely low power consumption enables continuous monitoring",
+                        "Immediate detection reduces crop loss and chemical use"
+                    ],
+                    "novelty_score": 88,
+                    "market_potential": "High"
+                }
+            ]
+        return json.dumps(mock_ideas)
+
     # 1. Check if the prompt is for the Research Agent
     if ("research topics" in prompt_lower or "research_topics" in prompt_lower or "abstracts" in prompt_lower) and "patent" not in prompt_lower:
         # Check domain context
@@ -343,15 +482,5 @@ def get_fallback_json(prompt: str) -> str:
                 }
             ]
         return json.dumps(mock_clusters)
-        
-    elif "novelty_score" in prompt_lower or "competition_score" in prompt_lower or "patentability" in prompt_lower:
-        mock_eval = {
-            "novelty_score": 80,
-            "competition_score": 30,
-            "feasibility_score": 75,
-            "market_potential_score": 85,
-            "reasoning": "Prior-art search indicates moderate to high novelty. The core claims around custom integration pathways appear distinct from existing utility patents, though standard interface modules present minor competition."
-        }
-        return json.dumps(mock_eval)
         
     return "[]"
